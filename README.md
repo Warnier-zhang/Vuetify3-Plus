@@ -223,7 +223,7 @@
     | ----------- | ------------------------------------------------------- | -------- | ------- |
     | `items`     | 数据集                                                  | `array`  | `[]`    |
     | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
-    | `itemValue` | 数据项的值对应属性                                      | `string` | `id`    |
+    | `itemValue` | 数据项的值对应属性                                      | `string` | `value` |
     | `itemTitle` | 数据项名称对应属性                                      | `string` | `title` |
 
 * 事件
@@ -264,14 +264,14 @@
 #### 纸片组（CChipGroup）
 
 ```
-<CAutocomplete
+<CChipGroup
     v-model="productId"
-    v-model:title="productTitle"
-    label="商品"
     url="/test/products.json"
-    variant="outlined"
-    density="compact"
-    clearable>
+    selected-class="text-warning"
+    column
+    chip-size="small"
+    chip-variant="outlined"
+    :chip-filter="true">
 </CAutocomplete>
 ```
 
