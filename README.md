@@ -251,7 +251,7 @@
 ```
 
 * 属性
-    * 同`VSelect`和`CSelect`；
+    * 同`VAutocomplete`和`CSelect`；
 * 事件
     * 同`VAutocomplete`；
 * 插槽
