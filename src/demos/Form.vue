@@ -1,10 +1,10 @@
 <template>
     <div>
-        <v-breadcrumbs class="pa-0" :items="['控件', '表单（10）']"></v-breadcrumbs>
+        <v-breadcrumbs :items="['控件', '表单（10）']"></v-breadcrumbs>
 
         <v-row>
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CPassword:</v-list-subheader>
+                <v-list-subheader>CPassword:</v-list-subheader>
 
                 <CPassword
                     v-model="password"
@@ -15,7 +15,7 @@
             </v-col>
 
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CCaptcha:</v-list-subheader>
+                <v-list-subheader>CCaptcha:</v-list-subheader>
 
                 <CCaptcha
                     v-model="captcha"
@@ -27,7 +27,7 @@
             </v-col>
 
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CEmail:</v-list-subheader>
+                <v-list-subheader>CEmail:</v-list-subheader>
 
                 <CEmail
                     v-model="email"
@@ -40,7 +40,7 @@
 
         <v-row>
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CDatePicker:</v-list-subheader>
+                <v-list-subheader>CDatePicker:</v-list-subheader>
 
                 <CDatePicker
                     v-model="date"
@@ -52,7 +52,7 @@
             </v-col>
 
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CDatetimePicker:</v-list-subheader>
+                <v-list-subheader>CDatetimePicker:</v-list-subheader>
 
                 <CDatetimePicker
                     v-model="time"
@@ -65,7 +65,7 @@
             </v-col>
         </v-row>
 
-        <v-list-subheader class="pl-1">CCascader:</v-list-subheader>
+        <v-list-subheader>CCascader:</v-list-subheader>
         <v-row>
             <v-col cols="2">
                 <CCascader
@@ -82,7 +82,7 @@
 
         <v-row>
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CSelect:</v-list-subheader>
+                <v-list-subheader>CSelect:</v-list-subheader>
 
                 <CSelect
                     v-model="productId2"
@@ -99,7 +99,7 @@
             </v-col>
 
             <v-col cols="2">
-                <v-list-subheader class="pl-1">CAutocomplete:</v-list-subheader>
+                <v-list-subheader>CAutocomplete:</v-list-subheader>
 
                 <CAutocomplete
                     v-model="productId2"
@@ -116,7 +116,7 @@
             </v-col>
         </v-row>
 
-        <v-list-subheader class="pl-1">CChipGroup:</v-list-subheader>
+        <v-list-subheader>CChipGroup:</v-list-subheader>
         <v-row>
             <v-col cols="12">
                 <CChipGroup
@@ -131,7 +131,7 @@
             </v-col>
         </v-row>
 
-        <v-list-subheader class="pl-1">CFileUpload:</v-list-subheader>
+        <v-list-subheader>CFileUpload:</v-list-subheader>
         <v-row>
             <v-col cols="2">
                 <CFileUpload

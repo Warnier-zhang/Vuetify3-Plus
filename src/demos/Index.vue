@@ -2,6 +2,10 @@
     <v-app>
         <v-main>
             <v-container fluid>
+                <Feedback/>
+
+                <v-divider class="mt-8"></v-divider>
+
                 <Form/>
 
                 <v-divider></v-divider>
@@ -11,6 +15,7 @@
 </template>
 
 <script setup>
+import Feedback from '@/demos/Feedback.vue';
 import Form from '@/demos/Form.vue';
 </script>
 

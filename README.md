@@ -14,7 +14,134 @@
 
 ## 使用指南
 ### 表格
-### 交互
+### 交互（3）
+
+#### 消息框（CMessage）
+
+```
+import {CMessage} from 'vuetify3-plus';
+
+CMessage.success('Hello, World');
+CMessage.info('Hello, World');
+CMessage.warning('Hello, World');
+CMessage.error('Hello, World');
+```
+
+* 属性
+
+  * 无；
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  | 名称      | 描述                  | 参数       | 默认值 |
+  | --------- | --------------------- | ---------- | ------ |
+  | `success` | 显示`success`类型消息 | `[string]` | 无     |
+  | `info`    | 显示`info`类型消息    | `[string]` | 无     |
+  | `warning` | 显示`warning`类型消息 | `[string]` | 无     |
+  | `error`   | 显示`error`类型消息   | `[string]` | 无     |
+
+#### 弹出框（CModal）
+
+用于替代`window.alert`、`window.confirm`和`window.prompt`。
+
+```
+import {CModal} from 'vuetify3-plus';
+
+CModal.alert({
+    title: 'Alert',
+    message: 'Hello, World',
+});
+
+CModal.confirm({
+    title: 'Confirm',
+    message: 'Are you OK?',
+    onOkClick() {
+    	CMessage.success('Yes');
+    },
+    onCancelClick() {
+    	CMessage.error('No');
+    },
+});
+
+CModal.prompt({
+    title: 'Prompt',
+    message: 'Please input numbers:',
+    onOkClick(input) {
+    	CMessage.success(`Numbers are ${input}`);
+    },
+    onCancelClick() {
+    	CMessage.error('Cancel');
+    },
+});
+```
+
+* 属性
+
+  * 无；
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  | 名称      | 描述                             | 参数          | 默认值 |
+  | --------- |-------------| ---------- | ------ |
+  | `alert`   | 显示警告弹窗，并等待用户关闭     | `[object]`  | 无     |
+  | `confirm` | 显示确认弹窗，并等待用户确定     | `[object]`  | 无     |
+  | `prompt`  | 显示输入弹窗，并返回用户输入结果 | `[object]`  | 无     |
+  
+  参数说明：
+  
+  ```
+  {
+      title: 标题,
+      message: 消息,
+      onOkClick: 回调函数，当用户点击确定按钮时触发,
+      onCancelClick: 回调函数，当用户点击取消按钮时触发,
+  }
+  ```
+
+#### 加载（CLoading）
+
+```
+import {CLoading} from 'vuetify3-plus';
+
+CLoading.open();
+CLoading.close();
+```
+
+* 属性
+
+  * 无；
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  | 名称    | 描述     | 参数 | 默认值 |
+  | ------- | -------- | ---- | ------ |
+  | `open`  | 显示加载 | 无   | 无     |
+  | `close` | 关闭加载 | 无   | 无     |
+
 ### 表单（10）
 
 #### 密码（CPassword）

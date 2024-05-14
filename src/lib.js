@@ -1,15 +1,21 @@
 // Components
 // Form
-import CPassword from './components/form/CPassword.vue';
-import CCaptcha from './components/form/CCaptcha.vue';
-import CEmail from './components/form/CEmail.vue';
-import CDatePicker from './components/form/CDatePicker.vue';
-import CDatetimePicker from './components/form/CDatetimePicker.vue';
-import CCascader from './components/form/CCascader.vue';
-import CSelect from './components/form/selection/CSelect.vue';
-import CAutocomplete from './components/form/selection/CAutocomplete.vue';
-import CChipGroup from './components/form/selection/CChipGroup.vue';
-import CFileUpload from './components/form/CFileUpload.vue';
+import CPassword from '@/components/form/CPassword.vue';
+import CCaptcha from '@/components/form/CCaptcha.vue';
+import CEmail from '@/components/form/CEmail.vue';
+import CDatePicker from '@/components/form/CDatePicker.vue';
+import CDatetimePicker from '@/components/form/CDatetimePicker.vue';
+import CCascader from '@/components/form/CCascader.vue';
+import CSelect from '@/components/form/selection/CSelect.vue';
+import CAutocomplete from '@/components/form/selection/CAutocomplete.vue';
+import CChipGroup from '@/components/form/selection/CChipGroup.vue';
+import CFileUpload from '@/components/form/CFileUpload.vue';
+
+// Feedback
+import CMessage from '@/components/feedback/CMessage';
+import CModal from '@/components/feedback/CModal';
+import CLoading from '@/components/feedback/CLoading';
+
 
 // Composables
 import {useDate} from '@/composables/date';
@@ -33,6 +39,11 @@ export {
     CAutocomplete,
     CChipGroup,
     CFileUpload,
+
+    // Feedback
+    CMessage,
+    CModal,
+    CLoading,
 
     // Composables
     useDate,
