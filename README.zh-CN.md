@@ -18,6 +18,7 @@
 ### 表单（10）
 
 #### 密码（CPassword）
+
 ```
 <CPassword
     v-model="password"
@@ -26,6 +27,10 @@
     clearable>
 </CPassword>
 ```
+效果图：
+
+![CPassword](./images/c-password.png)
+
 * 属性
   * 同`VTextField`；
 * 事件
@@ -39,22 +44,30 @@
 ```
 <CCaptcha
     v-model="captcha"
-    :url="/test/captcha.png"
+    url="/demos/captcha.jpg"
     variant="outlined"
     density="compact"
     clearable>
 </CCaptcha>
 ```
+效果图：
+
+![CCaptcha](./images/c-captcha.png)
+
 * 属性 
+
   * 同`VTextField`；
-  
+
   * | 名称  | 描述           | 类型     | 默认值 |
     | ----- | -------------- | -------- | ------ |
     | `url` | 验证码图片地址 | `string` | `null` |
+
 * 事件
     * 同`VTextField`；
+
 * 插槽
     * 无；
+
 * 方法
     * 无；
 
@@ -68,19 +81,24 @@
     clearable>
 </CEmail>
 ```
+效果图：
+
+![CEmail](./images/c-email.png)
+
 * 属性
+
     * 同`VTextField`；
-    
+
     * | 名称      | 描述       | 类型    | 默认值                                                       |
       | --------- | ---------- | ------- | ------------------------------------------------------------ |
       | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
-    
+
 * 事件
     * 同`VTextField`；
-    
+
 * 插槽
     * 无；
-    
+
 * 方法
     * 无；
 
@@ -94,6 +112,10 @@
     clearable>
 </CDatePicker>
 ```
+效果图：
+
+![CDatePicker](./images/c-datepicker.png)
+
 * 属性
   * 同`VTextField`；
 * 事件
@@ -114,38 +136,49 @@
     clearable>
 </CDatetimePicker>
 ```
+效果图：
+
+![CDatetimePicker](./images/c-datetimepicker.png)
+
 * 属性
+
   * 同`VTextField`；
-  
+
   * | 名称         | 描述                                                     | 类型      | 默认值       |
     | ------------ | -------------------------------------------------------- | --------- | ------------ |
     | `pickSecond` | 是否允许选择秒                                           | `boolean` | `false`      |
     | `dateFormat` | 日期格式                                                 | `string`  | `yyyy-MM-dd` |
     | `timeFormat` | 时间格式，值可由用户自定义，或者根据`pickSecond`的值变化 | `string`  | `HH:mm`      |
-  
+
 * 事件
   * 同`VTextField`；
-  
+
 * 插槽
   * 无；
-  
+
 * 方法
   * 无；
 
-#### 级联选择（CDatetimePicker）
+#### 级联选择（CCascader）
 ```
 <CCascader
-    v-model="productId"
+    v-model="productId1"
     label="商品"
-    url="/products.json"
+    url="/demos/products1.json"
     variant="outlined"
     density="compact"
+    multiple
     clearable>
 </CCascader>
 ```
+效果图：
+
+![CCascader](./images/c-cascader.png)
+
 * 属性
+
   * 同`VTextField`；
-  
+
   * | 名称           | 描述                                                    | 类型      | 默认值     |
     | -------------- | ------------------------------------------------------- | --------- | ---------- |
     | `items`        | 数据集                                                  | `array`   | `[]`       |
@@ -154,13 +187,13 @@
     | `itemTitle`    | 数据项名称对应属性                                      | `string`  | `title`    |
     | `itemChildren` | 数据项子集对应属性                                      | `string`  | `children` |
     | `multiple`     | 是否允许多选                                            | `boolean` | `false`    |
-  
+
 * 事件
   * 同`VTextField`；
-  
+
 * 插槽
   * 无；
-  
+
 * 方法
   * 无；
 
@@ -170,10 +203,10 @@
 
 ```
 <CSelect
-    v-model="productId"
-    v-model:title="productTitle"
+    v-model="productId2"
+    v-model:title="productTitle2"
     label="商品"
-    url="/test/products.json"
+    url="/demos/products2.json"
     variant="outlined"
     density="compact"
     clearable>
@@ -207,10 +240,10 @@
 
 ```
 <CAutocomplete
-    v-model="productId"
-    v-model:title="productTitle"
+    v-model="productId2"
+    v-model:title="productTitle2"
     label="商品"
-    url="/test/products.json"
+    url="/demos/products2.json"
     variant="outlined"
     density="compact"
     clearable>
@@ -230,15 +263,19 @@
 
 ```
 <CChipGroup
-    v-model="productId"
-    url="/test/products.json"
+    v-model="productId2"
+    url="/demos/products2.json"
     selected-class="text-warning"
     column
     chip-size="small"
     chip-variant="outlined"
-    :chip-filter="true">
+    chip-filter>
 </CAutocomplete>
 ```
+
+效果图：
+
+![CChipGroup](./images/c-chipgroup.png)
 
 * 属性 
   * 同`VChipGroup`和`CSelect`；
@@ -258,13 +295,21 @@
 <CFileUpload
     v-model="fileId"
     label="上传文件"
-    upload-file-url="/api/test/files/upload"
-    browse-file-url="/api/test/files/download"
+    upload-file-url="/api/file-explorer/files/upload"
+    browse-file-url="/api/file-explorer/files/download"
     variant="outlined"
     density="compact"
     clearable>
 </CFileUpload>
 ```
+
+效果图：
+
+![CFileUpload](./images/c-fileupload1.png)
+
+![CFileUpload](./images/c-fileupload2.png)
+
+![CFileUpload](./images/c-fileupload3.png)
 
 * 属性 
 

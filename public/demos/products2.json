@@ -1,0 +1,30 @@
+{
+  "errorCode": 1,
+  "data": [
+    {
+      "value": 11,
+      "title": "白菜"
+    },
+    {
+      "value": 12,
+      "title": "青菜"
+    },
+    {
+      "value": 21,
+      "title": "苹果"
+    },
+    {
+      "value": 22,
+      "title": "香蕉"
+    },
+    {
+      "value": 31,
+      "title": "猪肉"
+    },
+    {
+      "value": 32,
+      "title": "鸡肉"
+    }
+  ],
+  "msg": "操作成功！"
+}

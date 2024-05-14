@@ -1,0 +1,48 @@
+{
+  "errorCode": 1,
+  "data": [
+    {
+      "id": 1,
+      "title": "蔬菜",
+      "children": [
+        {
+          "id": 11,
+          "title": "白菜"
+        },
+        {
+          "id": 12,
+          "title": "青菜"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "水果",
+      "children": [
+        {
+          "id": 21,
+          "title": "苹果"
+        },
+        {
+          "id": 22,
+          "title": "香蕉"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "肉类",
+      "children": [
+        {
+          "id": 31,
+          "title": "猪肉"
+        },
+        {
+          "id": 32,
+          "title": "鸡肉"
+        }
+      ]
+    }
+  ],
+  "msg": "操作成功！"
+}
