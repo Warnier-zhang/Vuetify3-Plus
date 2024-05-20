@@ -16,6 +16,12 @@ import CMessage from '@/components/feedback/CMessage';
 import CModal from '@/components/feedback/CModal';
 import CLoading from '@/components/feedback/CLoading';
 
+// Other
+import CImg from '@/components/CImg.vue';
+import CAnchor from '@/components/CAnchor.vue';
+import CLabel from '@/components/CLabel.vue';
+import CSpinner from '@/components/CSpinner.vue';
+import CCKEditor5 from '@/components/CCKEditor5.vue';
 
 // Composables
 import {useDate} from '@/composables/date';
@@ -45,6 +51,13 @@ export {
     CModal,
     CLoading,
 
+    // Other
+    CImg,
+    CAnchor,
+    CLabel,
+    CSpinner,
+    CCKEditor5,
+
     // Composables
     useDate,
     useForm,
@@ -67,6 +80,13 @@ const components = [
     CAutocomplete,
     CChipGroup,
     CFileUpload,
+
+    // Other
+    CImg,
+    CAnchor,
+    CLabel,
+    CSpinner,
+    CCKEditor5,
 ];
 const Vuetify3Plus = {
     install: (app) => {

@@ -8,7 +8,9 @@
 
                 <Form/>
 
-                <v-divider></v-divider>
+                <v-divider class="mt-8"></v-divider>
+
+                <Other/>
             </v-container>
         </v-main>
     </v-app>
@@ -17,6 +19,7 @@
 <script setup>
 import Feedback from '@/demos/Feedback.vue';
 import Form from '@/demos/Form.vue';
+import Other from '@/demos/Other.vue';
 </script>
 
 <style scoped>

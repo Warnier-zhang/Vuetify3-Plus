@@ -186,7 +186,7 @@ CLoading.close();
     * 同`VTextField`；
 
     * | 名称  | 描述           | 类型     | 默认值 |
-          | ----- | -------------- | -------- | ------ |
+      | ----- | -------------- | -------- | ------ |
       | `url` | 验证码图片地址 | `string` | `null` |
 
 * 事件
@@ -217,8 +217,8 @@ CLoading.close();
     * 同`VTextField`；
 
     * | 名称      | 描述       | 类型    | 默认值                                                       |
-            | --------- | ---------- | ------- | ------------------------------------------------------------ |
-      | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
+        | --------- | ---------- | ------- | ------------------------------------------------------------ |
+        | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
 
 * 事件
     * 同`VTextField`；
@@ -272,7 +272,7 @@ CLoading.close();
     * 同`VTextField`；
 
     * | 名称         | 描述                                                     | 类型      | 默认值       |
-          | ------------ | -------------------------------------------------------- | --------- | ------------ |
+      | ------------ | -------------------------------------------------------- | --------- | ------------ |
       | `pickSecond` | 是否允许选择秒                                           | `boolean` | `false`      |
       | `dateFormat` | 日期格式                                                 | `string`  | `yyyy-MM-dd` |
       | `timeFormat` | 时间格式，值可由用户自定义，或者根据`pickSecond`的值变化 | `string`  | `HH:mm`      |
@@ -462,4 +462,127 @@ CLoading.close();
 ### 图表
 
 ### 统计
-### 其他
+### 其他（5）
+
+#### 图片（CImg）
+
+结合`VImg`和`v-viewer`，支持放大缩小、旋转、翻转图片等。
+
+```
+<CImg src="/demos/bear.jpg"></CImg>
+```
+
+效果图：
+
+![CImg](./images/c-img1.png)
+
+![CPassword](./images/c-img2.png)
+
+* 属性
+  * 同`VImg`；
+* 事件
+  * 同`VImg`；
+* 插槽
+  * 无；
+* 方法
+  * 无；
+
+#### 链接（CAnchor）
+
+```
+<CAnchor
+    text="百度"
+    href="https://www.baidu.com/"
+    hint="百度一下，你就知道"
+    show-hint>
+</CAnchor>
+```
+
+* 属性
+
+  * | 名称       | 描述         | 类型      | 默认值  |
+    | ---------- | ------------ | --------- | ------- |
+    | `text`     | 名称         | `string`  | `null`  |
+    | `href`     | 链接         | `string`  | `null`  |
+    | `disabled` | 是否禁用     | `boolean` | `false` |
+    | `showHint` | 是否显示提示 | `boolean` | `false` |
+    | `hint`     | 提示         | `string`  | `null`  |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  * 无；
+
+#### 标签（CLabel）
+
+```
+<CLabel
+    :value="21"
+    url="/demos/products2.json">
+</CLabel>
+```
+
+* 属性
+
+  * | 名称        | 描述                                                    | 类型     | 默认值  |
+    | ----------- | ------------------------------------------------------- | -------- | ------- |
+    | `value`     | 值                                                      | `any`    | `null`  |
+    | `items`     | 数据集                                                  | `array`  | `[]`    |
+    | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
+    | `itemTitle` | 数据项的值对应属性                                      | `string` | `title` |
+    | `itemValue` | 数据项名称对应属性                                      | `string` | `value` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  * 无；
+
+#### 旋转器（CSpinner）
+
+参考Quasar框架实现。
+
+```
+<CSpinner 
+    class="ml-2" 
+    size="2em" 
+    :thickness="2">
+ </CSpinner>
+```
+
+效果图：
+
+![CSpinner](./images/c-spinner.png)
+
+* 属性
+
+  * | 名称        | 描述     | 类型               | 默认值    |
+    | ----------- | -------- | ------------------ | --------- |
+    | `color`     | 颜色     | `string`           | `primary` |
+    | `size`      | 尺寸大小 | `string`、`number` | `1em`     |
+    | `thickness` | 粗细程度 | `number`           | `5`       |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  * 无；
