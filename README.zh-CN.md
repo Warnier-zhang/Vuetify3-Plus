@@ -29,19 +29,19 @@ CMessage.error('Hello, World');
 
 * 属性
 
-  * 无；
+    * 无；
 
 * 事件
 
-  * 无；
+    * 无；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  | 名称      | 描述                  | 参数       | 默认值 |
+  | 名称      | 描述                  | 参数       | 返回值 |
     | --------- | --------------------- | ---------- | ------ |
   | `success` | 显示`success`类型消息 | `[string]` | 无     |
   | `info`    | 显示`info`类型消息    | `[string]` | 无     |
@@ -85,19 +85,19 @@ CModal.prompt({
 
 * 属性
 
-  * 无；
+    * 无；
 
 * 事件
 
-  * 无；
+    * 无；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  | 名称      | 描述                             | 参数          | 默认值 |
+  | 名称      | 描述                             | 参数          | 返回值 |
     | --------- |-------------| ---------- | ------ |
   | `alert`   | 显示警告弹窗，并等待用户关闭     | `[object]`  | 无     |
   | `confirm` | 显示确认弹窗，并等待用户确定     | `[object]`  | 无     |
@@ -125,19 +125,19 @@ CLoading.close();
 
 * 属性
 
-  * 无；
+    * 无；
 
 * 事件
 
-  * 无；
+    * 无；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  | 名称    | 描述     | 参数 | 默认值 |
+  | 名称    | 描述     | 参数 | 返回值 |
     | ------- | -------- | ---- | ------ |
   | `open`  | 显示加载 | 无   | 无     |
   | `close` | 关闭加载 | 无   | 无     |
@@ -159,13 +159,13 @@ CLoading.close();
 ![CPassword](./images/c-password.png)
 
 * 属性
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 验证码（CCaptcha）
 ```
@@ -183,20 +183,20 @@ CLoading.close();
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称  | 描述           | 类型     | 默认值 |
-          | ----- | -------------- | -------- | ------ |
-    | `url` | 验证码图片地址 | `string` | `null` |
+    * | 名称  | 描述           | 类型     | 默认值 |
+            | ----- | -------------- | -------- | ------ |
+      | `url` | 验证码图片地址 | `string` | `null` |
 
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-  * 无；
+    * 无；
 
 * 方法
-  * 无；
+    * 无；
 
 #### 邮件（CEmail）
 邮件地址输入自动补全。
@@ -214,20 +214,20 @@ CLoading.close();
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称      | 描述       | 类型    | 默认值                                                       |
-            | --------- | ---------- | ------- | ------------------------------------------------------------ |
-    | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
+    * | 名称      | 描述       | 类型    | 默认值                                                       |
+              | --------- | ---------- | ------- | ------------------------------------------------------------ |
+      | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
 
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-  * 无；
+    * 无；
 
 * 方法
-  * 无；
+    * 无；
 
 #### 日期选择（CDatePicker）
 ```
@@ -244,13 +244,13 @@ CLoading.close();
 ![CDatePicker](./images/c-datepicker.png)
 
 * 属性
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 日期时间选择（CDatetimePicker）
 ```
@@ -269,22 +269,22 @@ CLoading.close();
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称         | 描述                                                     | 类型      | 默认值       |
-          | ------------ | -------------------------------------------------------- | --------- | ------------ |
-    | `pickSecond` | 是否允许选择秒                                           | `boolean` | `false`      |
-    | `dateFormat` | 日期格式                                                 | `string`  | `yyyy-MM-dd` |
-    | `timeFormat` | 时间格式，值可由用户自定义，或者根据`pickSecond`的值变化 | `string`  | `HH:mm`      |
+    * | 名称         | 描述                                                     | 类型      | 默认值       |
+            | ------------ | -------------------------------------------------------- | --------- | ------------ |
+      | `pickSecond` | 是否允许选择秒                                           | `boolean` | `false`      |
+      | `dateFormat` | 日期格式                                                 | `string`  | `yyyy-MM-dd` |
+      | `timeFormat` | 时间格式，值可由用户自定义，或者根据`pickSecond`的值变化 | `string`  | `HH:mm`      |
 
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-  * 无；
+    * 无；
 
 * 方法
-  * 无；
+    * 无；
 
 #### 级联选择（CCascader）
 ```
@@ -304,25 +304,25 @@ CLoading.close();
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称           | 描述                                                    | 类型      | 默认值     |
-              | -------------- | ------------------------------------------------------- | --------- | ---------- |
-    | `items`        | 数据集                                                  | `array`   | `[]`       |
-    | `url`          | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string`  | `null`     |
-    | `itemId`       | 数据项的值对应属性                                      | `string`  | `id`       |
-    | `itemTitle`    | 数据项名称对应属性                                      | `string`  | `title`    |
-    | `itemChildren` | 数据项子集对应属性                                      | `string`  | `children` |
-    | `multiple`     | 是否允许多选                                            | `boolean` | `false`    |
+    * | 名称           | 描述                                                    | 类型      | 默认值     |
+            | -------------- | ------------------------------------------------------- | --------- | ---------- |
+      | `items`        | 数据集                                                  | `array`   | `[]`       |
+      | `url`          | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string`  | `null`     |
+      | `itemId`       | 数据项的值对应属性                                      | `string`  | `id`       |
+      | `itemTitle`    | 数据项名称对应属性                                      | `string`  | `title`    |
+      | `itemChildren` | 数据项子集对应属性                                      | `string`  | `children` |
+      | `multiple`     | 是否允许多选                                            | `boolean` | `false`    |
 
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-  * 无；
+    * 无；
 
 * 方法
-  * 无；
+    * 无；
 
 #### 下拉选择（CSelect）
 
@@ -342,26 +342,26 @@ CLoading.close();
 
 * 属性
 
-  * 同`VSelect`；
+    * 同`VSelect`；
 
-  * | 名称        | 描述                                                    | 类型     | 默认值  |
-              | ----------- | ------------------------------------------------------- | -------- | ------- |
-    | `items`     | 数据集                                                  | `array`  | `[]`    |
-    | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
-    | `itemValue` | 数据项的值对应属性                                      | `string` | `value` |
-    | `itemTitle` | 数据项名称对应属性                                      | `string` | `title` |
+    * | 名称        | 描述                                                    | 类型     | 默认值  |
+            | ----------- | ------------------------------------------------------- | -------- | ------- |
+      | `items`     | 数据集                                                  | `array`  | `[]`    |
+      | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
+      | `itemValue` | 数据项的值对应属性                                      | `string` | `value` |
+      | `itemTitle` | 数据项名称对应属性                                      | `string` | `title` |
 
 * 事件
 
-  * 同`VSelect`；
+    * 同`VSelect`；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
 
 #### 自动补全（CAutocomplete）
 
@@ -378,13 +378,13 @@ CLoading.close();
 ```
 
 * 属性
-  * 同`VAutocomplete`和`CSelect`；
+    * 同`VAutocomplete`和`CSelect`；
 * 事件
-  * 同`VAutocomplete`；
+    * 同`VAutocomplete`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 纸片组（CChipGroup）
 
@@ -405,14 +405,14 @@ CLoading.close();
 ![CChipGroup](./images/c-chipgroup.png)
 
 * 属性
-  * 同`VChipGroup`和`CSelect`；
-  * 前缀是`chip-`的属性同`VChip`；
+    * 同`VChipGroup`和`CSelect`；
+    * 前缀是`chip-`的属性同`VChip`；
 * 事件
-  * 同`VChipGroup`；
+    * 同`VChipGroup`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 上传文件（CFileUpload）
 
@@ -440,24 +440,24 @@ CLoading.close();
 
 * 属性
 
-  * 同`VFileInput`；
+    * 同`VFileInput`；
 
-  * | 名称            | 描述                                                         | 类型     | 默认值 |
-              | --------------- | ------------------------------------------------------------ | -------- | ------ |
-    | `uploadFileUrl` | 文件上传地址，该API需要接收参数upload，返回文件信息，文件信息包含名称、缩略图、类型等。文件类型同MIME。 | `string` | `null` |
-    | `browseFileUrl` | 文件预览、下载地址，该API需要接收参数fileId（文件ID），并且支持`HEAD`方法，响应头中包含文件信息`file-info`。 | `string` | `null` |
+    * | 名称            | 描述                                                         | 类型     | 默认值 |
+            | --------------- | ------------------------------------------------------------ | -------- | ------ |
+      | `uploadFileUrl` | 文件上传地址，该API需要接收参数`upload`，返回文件信息，文件信息包含名称、缩略图、类型等。文件类型同MIME。 | `string` | `null` |
+      | `browseFileUrl` | 文件预览、下载地址，该API需要接收参数`id`（文件ID），并且支持`HEAD`方法，响应头中包含文件信息`file-info`。 | `string` | `null` |
 
 * 事件
 
-  * 同`VFileInput`；
+    * 同`VFileInput`；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
 
 ### 图表
 
@@ -479,13 +479,13 @@ CLoading.close();
 ![CPassword](./images/c-img2.png)
 
 * 属性
-  * 同`VImg`；
+    * 同`VImg`；
 * 事件
-  * 同`VImg`；
+    * 同`VImg`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 链接（CAnchor）
 
@@ -500,25 +500,25 @@ CLoading.close();
 
 * 属性
 
-  * | 名称       | 描述         | 类型      | 默认值  |
-        | ---------- | ------------ | --------- | ------- |
-    | `text`     | 名称         | `string`  | `null`  |
-    | `href`     | 链接         | `string`  | `null`  |
-    | `disabled` | 是否禁用     | `boolean` | `false` |
-    | `showHint` | 是否显示提示 | `boolean` | `false` |
-    | `hint`     | 提示         | `string`  | `null`  |
+    * | 名称       | 描述         | 类型      | 默认值  |
+          | ---------- | ------------ | --------- | ------- |
+      | `text`     | 名称         | `string`  | `null`  |
+      | `href`     | 链接         | `string`  | `null`  |
+      | `disabled` | 是否禁用     | `boolean` | `false` |
+      | `showHint` | 是否显示提示 | `boolean` | `false` |
+      | `hint`     | 提示         | `string`  | `null`  |
 
 * 事件
 
-  * 无；
+    * 无；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
 
 #### 标签（CLabel）
 
@@ -531,25 +531,25 @@ CLoading.close();
 
 * 属性
 
-  * | 名称        | 描述                                                    | 类型     | 默认值  |
-        | ----------- | ------------------------------------------------------- | -------- | ------- |
-    | `value`     | 值                                                      | `any`    | `null`  |
-    | `items`     | 数据集                                                  | `array`  | `[]`    |
-    | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
-    | `itemTitle` | 数据项的值对应属性                                      | `string` | `title` |
-    | `itemValue` | 数据项名称对应属性                                      | `string` | `value` |
+    * | 名称        | 描述                                                    | 类型     | 默认值  |
+          | ----------- | ------------------------------------------------------- | -------- | ------- |
+      | `value`     | 值                                                      | `any`    | `null`  |
+      | `items`     | 数据集                                                  | `array`  | `[]`    |
+      | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
+      | `itemTitle` | 数据项的值对应属性                                      | `string` | `title` |
+      | `itemValue` | 数据项名称对应属性                                      | `string` | `value` |
 
 * 事件
 
-  * 无；
+    * 无；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
 
 #### 旋转器（CSpinner）
 
@@ -569,20 +569,61 @@ CLoading.close();
 
 * 属性
 
-  * | 名称        | 描述     | 类型               | 默认值    |
-        | ----------- | -------- | ------------------ | --------- |
-    | `color`     | 颜色     | `string`           | `primary` |
-    | `size`      | 尺寸大小 | `string`、`number` | `1em`     |
-    | `thickness` | 粗细程度 | `number`           | `5`       |
+    * | 名称        | 描述     | 类型               | 默认值    |
+          | ----------- | -------- | ------------------ | --------- |
+      | `color`     | 颜色     | `string`           | `primary` |
+      | `size`      | 尺寸大小 | `string`、`number` | `1em`     |
+      | `thickness` | 粗细程度 | `number`           | `5`       |
 
 * 事件
 
-  * 无；
+    * 无；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
+
+#### 富文本编辑器（CCKEditor5）
+
+```
+<CCKEditor5
+    ref="ckeditor"
+    v-model="html"
+    upload-file-url="/api/file-explorer/files/upload"
+    browse-file-url="/api/file-explorer/files/download">
+</CCKEditor5>
+```
+
+效果图：
+
+![CCKEditor5](./images/c-ckeditor5.png)
+
+* 属性
+
+    * | 名称            | 描述                                                         | 类型     | 默认值      |
+          | --------------- | ------------------------------------------------------------ | -------- | ----------- |
+      | `modelValue`    | 值                                                           | `string` | `null`      |
+      | `adapter`       | 文件上传适配器，可选的值有`simple`，`ckeditor5`。若值为`simple`时，则使用CKEditor 5内置的`SimpleUploadAdapter`。 | `string` | `ckeditor5` |
+      | `uploadFileUrl` | 文件上传地址，当`adapter`的值为`ckeditor5`时，该API需要接收参数`upload`，返回文件信息。 | `string` | `null`      |
+      | `browseFileUrl` | 文件预览、下载地址，当`adapter`的值为`ckeditor5`时，该API需要接收参数`id`（文件ID）。 | `string` | `null`      |
+
+* 事件
+
+    * 无；
+
+* 插槽
+
+    * 无；
+
+* 方法
+
+    * | 名称      | 描述                           | 参数 | 返回值   |
+          | --------- | ------------------------------ | ---- | -------- |
+      | `getHtml` | 获取HTML，同属性`modelValue`。 | 无   | `string` |
+      | `getText` | 获取纯文本。                   | 无   | `string` |
+
+    
