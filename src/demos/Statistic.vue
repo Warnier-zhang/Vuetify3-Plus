@@ -6,10 +6,10 @@
         <v-row>
             <v-col cols="2">
                 <CStat1
-                    color="red"
                     title="245k"
                     subtitle="Sales"
                     text="Calculated in last 7 days"
+                    color="red"
                     variant="outlined">
                 </CStat1>
             </v-col>

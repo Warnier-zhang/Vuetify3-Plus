@@ -12,6 +12,38 @@
 
 组件名称前缀——“C”，可以解释成“Core”、“Common”；
 
+## 安装方法
+
+1. 克隆Vuetify3-Plus项目源码：
+
+   ```
+   git clone https://github.com/Warnier-zhang/Vuetify3-Plus.git
+   ```
+
+2. 编译、打包项目：
+
+   ```
+   npm install && npm run build
+   ```
+
+3. 编辑`package.json`文件，在新项目中引入Vuetify3 Plus，并安装：
+
+   ```
+   package.json
+   ---
+   "dependencies": {
+       ...
+       "vuetify3-plus": "file:../Vuetify3-Plus",
+       ...
+   }
+   
+   npm install
+   ```
+
+### 运行示例
+
+在克隆下来的项目源码中，执行`npm run dev`脚本，然后，访问http://localhost:5173。
+
 ## 使用指南
 ### 表格
 ### 交互（3）
@@ -397,7 +429,7 @@ CLoading.close();
     chip-size="small"
     chip-variant="outlined"
     chip-filter>
-</CAutocomplete>
+</CChipGroup>
 ```
 
 效果图：
@@ -467,10 +499,10 @@ CLoading.close();
 
 ```
 <CStat1
-    color="red"
     title="245k"
     subtitle="Sales"
     text="Calculated in last 7 days"
+    color="red"
     variant="text">
 </CStat1>
 ```
