@@ -461,7 +461,296 @@ CLoading.close();
 
 ### 图表
 
-### 统计
+### 统计（7）
+
+#### v1（CStat1）
+
+```
+<CStat1
+    color="red"
+    title="245k"
+    subtitle="Sales"
+    text="Calculated in last 7 days"
+    variant="text">
+</CStat1>
+```
+
+效果图：
+
+![CStat1](./images/c-stat1.png)
+
+* 属性
+
+  * | 名称       | 描述   | 类型     | 默认值 |
+    | ---------- | ------ | -------- | ------ |
+    | `title`    | 标题   | `string` | `null` |
+    | `subtitle` | 副标题 | `string` | `null` |
+    | `text`     | 文本   | `string` | `null` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * | 名称       | 描述   | 作用域 |
+    | ---------- | ------ | ------ |
+    | `title`    | 标题   | 无     |
+    | `subtitle` | 副标题 | 无     |
+    | `text`     | 文本   | 无     |
+
+* 方法
+
+  * 无；
+
+#### v2（CStat2）
+
+```
+<CStat2
+    title="245k"
+    subtitle="Sales"
+    icon="mdi-trending-up"
+    color="red"
+    text="Calculated in last 7 days">
+</CStat2>
+```
+
+效果图：
+
+![CStat2](./images/c-stat2.png)
+
+* 属性
+
+  * | 名称       | 描述         | 类型     | 默认值 |
+    | ---------- | ------------ | -------- | ------ |
+    | `title`    | 标题         | `string` | `null` |
+    | `subtitle` | 副标题       | `string` | `null` |
+    | `text`     | 文本         | `string` | `null` |
+    | `icon`     | 图标         | `string` | `null` |
+    | `color`    | 颜色（图标） | `string` | `null` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * | 名称    | 描述 | 作用域 |
+    | ------- | ---- | ------ |
+    | `title` | 标题 | 无     |
+    | `icon`  | 图标 | 无     |
+    | `text`  | 文本 | 无     |
+
+* 方法
+
+  * 无；
+
+#### v3（CStat3）
+
+```
+<CStat3
+    title="245k"
+    subtitle="Sales"
+    color="red"
+    expected="999"
+    actual="245">
+</CStat3>
+```
+
+效果图：
+
+![CStat3](./images/c-stat3.png)
+
+* 属性
+
+  * | 名称       | 描述           | 类型               | 默认值 |
+    | ---------- | -------------- | ------------------ | ------ |
+    | `title`    | 标题           | `string`           | `null` |
+    | `subtitle` | 副标题         | `string`           | `null` |
+    | `color`    | 颜色（进度条） | `string`           | `null` |
+    | `actual`   | 实际值         | `string`、`number` | `null` |
+    | `expected` | 预期值         | `string`、`number` | `null` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * | 名称       | 描述   | 作用域 |
+    | ---------- | ------ | ------ |
+    | `title`    | 标题   | 无     |
+    | `subtitle` | 副标题 | 无     |
+
+* 方法
+
+  * 无；
+
+#### v4（CStat4）
+
+```
+<CStat4
+    title="245k"
+    subtitle="Sales"
+    text="Calculated in last 7 days"
+    emphasis="+15%"
+    color="red">
+</CStat4>
+```
+
+效果图：
+
+![CStat4](./images/c-stat4.png)
+
+* 属性
+
+  * | 名称       | 描述               | 类型     | 默认值 |
+    | ---------- | ------------------ | -------- | ------ |
+    | `title`    | 标题               | `string` | `null` |
+    | `subtitle` | 副标题             | `string` | `null` |
+    | `text`     | 文本               | `string` | `null` |
+    | `emphasis` | 强调               | `string` | `null` |
+    | `color`    | 颜色（标记、强调） | `string` | `null` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * | 名称       | 描述   | 作用域 |
+    | ---------- | ------ | ------ |
+    | `title`    | 标题   | 无     |
+    | `subtitle` | 副标题 | 无     |
+    | `text`     | 文本   | 无     |
+    | `emphasis` | 强调   | 无     |
+
+* 方法
+
+  * 无；
+
+#### v5（CStat5）
+
+```
+<CStat5
+    title="245k"
+    subtitle="Sales"
+    text="Calculated in last 7 days"
+    icon="mdi-trending-up"
+    color="red">
+</CStat5>
+```
+
+效果图：
+
+![CStat5](./images/c-stat5.png)
+
+* 属性
+
+  * | 名称       | 描述         | 类型     | 默认值 |
+    | ---------- | ------------ | -------- | ------ |
+    | `title`    | 标题         | `string` | `null` |
+    | `subtitle` | 副标题       | `string` | `null` |
+    | `text`     | 文本         | `string` | `null` |
+    | `icon`     | 图标         | `string` | `null` |
+    | `color`    | 颜色（图标） | `string` | `null` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 暂无；
+
+* 方法
+
+  * 无；
+
+#### v6（CStat6）
+
+```
+<CStat6
+    title="245k"
+    subtitle="Sales"
+    icon="mdi-trending-up"
+    color="red">
+</CStat6>
+```
+
+效果图：
+
+![CStat6](./images/c-stat6.png)
+
+* 属性
+
+  * | 名称       | 描述                                                         | 类型      | 默认值     |
+    | ---------- | ------------------------------------------------------------ | --------- | ---------- |
+    | `title`    | 标题                                                         | `string`  | `null`     |
+    | `subtitle` | 副标题                                                       | `string`  | `null`     |
+    | `icon`     | 图标                                                         | `string`  | `null`     |
+    | `color`    | 颜色（图标）                                                 | `string`  | `null`     |
+    | `rounded`  | 形状是否是圆角矩形，默认圆形                                 | `boolean` | `true`     |
+    | `variant`  | 变体，可选值有`flat`、`text`、`elevated`、`tonal`、`outlined`、`plain`等 | `string`  | `elevated` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * | 名称       | 描述   | 作用域 |
+    | ---------- | ------ | ------ |
+    | `title`    | 标题   | 无     |
+    | `subtitle` | 副标题 | 无     |
+    | `icon`     | 图标   | 无     |
+
+* 方法
+
+  * 无；
+
+#### v7（CStat7）
+
+```
+<CStat7
+    title="Google Drive"
+    subtitle="Automate your file upload workflow"
+    icon="mdi-google-drive"
+    avatar
+    color="grey"
+    btn-text="Connected"
+    btn-color="red">
+</CStat7>
+```
+
+效果图：
+
+![CStat7](./images/c-stat7.png)
+
+* 属性
+
+  * | 名称       | 描述               | 类型      | 默认值  |
+    | ---------- | ------------------ | --------- | ------- |
+    | `title`    | 标题               | `string`  | `null`  |
+    | `subtitle` | 副标题             | `string`  | `null`  |
+    | `avatar`   | 是否显示头像       | `boolean` | `false` |
+    | `icon`     | 图标               | `string`  | `null`  |
+    | `color`    | 颜色（头像、图标） | `string`  | `null`  |
+    | `btnText`  | 按钮文本           | `string`  | `null`  |
+    | `btnColor` | 按钮颜色           | `string`  | `null`  |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 暂无；
+
+* 方法
+
+  * 无；
+
 ### 其他（5）
 
 #### 图片（CImg）

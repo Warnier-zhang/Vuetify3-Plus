@@ -16,6 +16,15 @@ import CMessage from '@/components/feedback/CMessage';
 import CModal from '@/components/feedback/CModal';
 import CLoading from '@/components/feedback/CLoading';
 
+// Statistic
+import CStat1 from '@/components/statistic/CStat1.vue';
+import CStat2 from '@/components/statistic/CStat2.vue';
+import CStat3 from '@/components/statistic/CStat3.vue';
+import CStat4 from '@/components/statistic/CStat4.vue';
+import CStat5 from '@/components/statistic/CStat5.vue';
+import CStat6 from '@/components/statistic/CStat6.vue';
+import CStat7 from '@/components/statistic/CStat7.vue';
+
 // Other
 import CImg from '@/components/CImg.vue';
 import CAnchor from '@/components/CAnchor.vue';
@@ -51,6 +60,15 @@ export {
     CModal,
     CLoading,
 
+    // Statistic
+    CStat1,
+    CStat2,
+    CStat3,
+    CStat4,
+    CStat5,
+    CStat6,
+    CStat7,
+
     // Other
     CImg,
     CAnchor,
@@ -80,6 +98,15 @@ const components = [
     CAutocomplete,
     CChipGroup,
     CFileUpload,
+
+    // Statistic
+    CStat1,
+    CStat2,
+    CStat3,
+    CStat4,
+    CStat5,
+    CStat6,
+    CStat7,
 
     // Other
     CImg,
