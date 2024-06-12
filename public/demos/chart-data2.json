@@ -1,0 +1,82 @@
+{
+  "errorCode": 1,
+  "data": [
+    [
+      {
+        "serieName": "2014",
+        "name": "IE",
+        "x": "IE",
+        "y": 58.2
+      },
+      {
+        "serieName": "2014",
+        "name": "Firefox",
+        "x": "Firefox",
+        "y": 18.1
+      },
+      {
+        "serieName": "2014",
+        "name": "Chrome",
+        "x": "Chrome",
+        "y": 16.3
+      },
+      {
+        "serieName": "2014",
+        "name": "Safari",
+        "x": "Safari",
+        "y": 5.8
+      },
+      {
+        "serieName": "2014",
+        "name": "Edge",
+        "x": "Edge",
+        "y": 0.0
+      },
+      {
+        "serieName": "2014",
+        "name": "Other",
+        "x": "Other",
+        "y": 1.6
+      }
+    ],
+    [
+      {
+        "serieName": "2024",
+        "name": "IE",
+        "x": "IE",
+        "y": 0.2
+      },
+      {
+        "serieName": "2024",
+        "name": "Firefox",
+        "x": "Firefox",
+        "y": 2.8
+      },
+      {
+        "serieName": "2024",
+        "name": "Chrome",
+        "x": "Chrome",
+        "y": 65.1
+      },
+      {
+        "serieName": "2024",
+        "name": "Safari",
+        "x": "Safari",
+        "y": 18.1
+      },
+      {
+        "serieName": "2024",
+        "name": "Edge",
+        "x": "Edge",
+        "y": 5.2
+      },
+      {
+        "serieName": "2024",
+        "name": "Other",
+        "x": "Other",
+        "y": 8.6
+      }
+    ]
+  ],
+  "msg": "操作成功！"
+}

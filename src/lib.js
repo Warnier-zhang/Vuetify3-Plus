@@ -16,6 +16,16 @@ import CMessage from '@/components/feedback/CMessage';
 import CModal from '@/components/feedback/CModal';
 import CLoading from '@/components/feedback/CLoading';
 
+// ECharts
+import CLineChart from '@/components/chart/echarts/CLineChart.vue';
+import CAreaChart from '@/components/chart/echarts/CAreaChart.vue';
+import CColumnChart from '@/components/chart/echarts/CColumnChart.vue';
+import CBubbleChart from '@/components/chart/echarts/CBubbleChart.vue';
+import CPieChart from '@/components/chart/echarts/CPieChart.vue';
+import CDonutChart from '@/components/chart/echarts/CDonutChart.vue';
+import CHalfDonutChart from '@/components/chart/echarts/CHalfDonutChart.vue';
+import CCoxcombChart from '@/components/chart/echarts/CCoxcombChart.vue';
+
 // Statistic
 import CStat1 from '@/components/statistic/CStat1.vue';
 import CStat2 from '@/components/statistic/CStat2.vue';
@@ -60,6 +70,16 @@ export {
     CModal,
     CLoading,
 
+    // ECharts
+    CLineChart,
+    CAreaChart,
+    CColumnChart,
+    CBubbleChart,
+    CPieChart,
+    CDonutChart,
+    CHalfDonutChart,
+    CCoxcombChart,
+
     // Statistic
     CStat1,
     CStat2,
@@ -98,6 +118,16 @@ const components = [
     CAutocomplete,
     CChipGroup,
     CFileUpload,
+
+    // ECharts
+    CLineChart,
+    CAreaChart,
+    CColumnChart,
+    CBubbleChart,
+    CPieChart,
+    CDonutChart,
+    CHalfDonutChart,
+    CCoxcombChart,
 
     // Statistic
     CStat1,

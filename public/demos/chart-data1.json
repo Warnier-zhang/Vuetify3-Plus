@@ -1,0 +1,37 @@
+{
+  "errorCode": 1,
+  "data": [
+    {
+      "serieName": "2024",
+      "name": "IE",
+      "x": "IE",
+      "y": 0.2
+    },
+    {
+      "name": "Firefox",
+      "x": "Firefox",
+      "y": 2.8
+    },
+    {
+      "name": "Chrome",
+      "x": "Chrome",
+      "y": 65.1
+    },
+    {
+      "name": "Safari",
+      "x": "Safari",
+      "y": 18.1
+    },
+    {
+      "name": "Edge",
+      "x": "Edge",
+      "y": 5.2
+    },
+    {
+      "name": "Other",
+      "x": "Other",
+      "y": 8.6
+    }
+  ],
+  "msg": "操作成功！"
+}

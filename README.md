@@ -26,7 +26,7 @@
    npm install && npm run build
    ```
 
-3. 编辑`package.json`文件，在新项目中引入Vuetify3 Plus，并安装：
+3. 在新项目中，编辑`package.json`文件，引入Vuetify3 Plus，并安装：
 
    ```
    package.json
@@ -42,7 +42,7 @@
 
 ### 运行示例
 
-在克隆下来的项目源码中，执行`npm run dev`脚本，然后，访问http://localhost:5173。
+在克隆下来的项目源码中，执行`npm run dev`脚本，然后，访问http://localhost:5173
 
 ## 使用指南
 ### 表格
@@ -491,7 +491,349 @@ CLoading.close();
 
     * 无；
 
-### 图表
+### 图表（8）
+
+> 图表类的组件，如CLineChart、CPieChart等，鉴于它们的属性、数据结构类似，并且，对它们有部分相同的扩展需求——比如通过URL加载数据，锁定宽高比、本地化等，因此，创建了一个公共的组件——BaseChart来达到上述目的。
+
+#### 折线图（CLineChart）
+
+```
+<CLineChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    :smooth="true"
+    :steped="false"
+    :aspect-ratio="1">
+</CLineChart>
+
+<CLineChart
+    url="/demos/chart-data2.json"
+    title="2014、2024年浏览器份额排行榜"
+    subtitle="近十年"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    show-legend
+    :show-point="false"
+    multiple
+    :aspect-ratio="1">
+</CLineChart>
+```
+
+效果图：
+
+![CLineChart](./images/c-line-chart.png)
+
+* 属性
+
+  * | 名称            | 描述                                                         | 类型               | 默认值      |
+    | --------------- | ------------------------------------------------------------ | ------------------ | ----------- |
+    | `title`         | 标题                                                         | `string`           | `null`      |
+    | `subtitle`      | 副标题                                                       | `string`           | `null`      |
+    | `xAxisType`     | X轴类型，值同ECharts的`xAxis. type`属性                      | `string`           | `category`  |
+    | `xAxisTitle`    | X轴名称                                                      | `string`           | `null`      |
+    | `xAxisScale`    | X轴是否不从0开始                                             | `boolean`          | `false`     |
+    | `yAxisType`     | Y轴类型，值同ECharts的`yAxis. type`属性                      | `string`           | `value`     |
+    | `yAxisTitle`    | Y轴名称                                                      | `string`           | `null`      |
+    | `yAxisScale`    | Y轴是否不从0开始                                             | `boolean`          | `false`     |
+    | `yAxisUnit`     | Y轴单位                                                      | `string`           | `null`      |
+    | `series`        | 数据集，`key-value`方式                                      | `array`            | `[]`        |
+    | `url`           | 数据集API访问地址，若`series`的值不为空，则以`series`的值为主 | `string`           | `null`      |
+    | `itemSerieName` | 序列名称对应的属性                                           | `string`           | `serieName` |
+    | `itemName`      | 点名称对应的属性                                             | `string`           | `name`      |
+    | `itemX`         | X轴对应的属性                                                | `string`           | `x`         |
+    | `itemY`         | Y轴对应的属性                                                | `string`           | `y`         |
+    | `aspectRatio`   | 宽高比                                                       | `string`、`number` | `auto`      |
+    | `multiple`      | 是否支持多个序列                                             | `boolean`          | `false`     |
+    | `showPoint`     | 是否显示点                                                   | `boolean`          | `true`      |
+    | `showLegend`    | 是否显示图例                                                 | `boolean`          | `false`     |
+    | `smooth`        | 是否显示平滑曲线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
+    | `steped`        | 是否显示梯形折线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
+    | `stacked`       | 是否折叠，**适用于柱形图**                                   | `boolean`          | `false`     |
+    | `exponent`      | 数量级，**适用于气泡图**。气泡图中气泡的大小由`itemY`的值决定，`10^exponent`用于缩放 | `string`、`number` | `1`         |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  * 无；
+
+#### 面积图（CAreaChart）
+
+```
+<CAreaChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    :aspect-ratio="1">
+</CAreaChart>
+
+<CAreaChart
+    url="/demos/chart-data2.json"
+    title="2014、2024年浏览器份额排行榜"
+    subtitle="近十年"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    show-legend
+    multiple
+    :aspect-ratio="1">
+</CAreaChart>
+```
+
+效果图：
+
+![CAreaChart](./images/c-area-chart.png)
+
+* 属性
+
+  * 同`CLineChart`；
+* 事件
+
+  * 无；
+* 插槽
+
+  * 无；
+* 方法
+
+  * 无；
+
+#### 柱形图（CColumnChart）
+
+```
+<CColumnChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    :aspect-ratio="1">
+</CColumnChart>
+
+<CColumnChart
+    url="/demos/chart-data2.json"
+    title="2014、2024年浏览器份额排行榜"
+    subtitle="近十年"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    show-legend
+    multiple
+    :stacked="false"
+    :aspect-ratio="1">
+</CColumnChart>
+```
+
+效果图：
+
+![CColumnChart](./images/c-column-chart.png)
+
+* 属性
+
+  * 同`CLineChart`；
+* 事件
+
+  * 无；
+* 插槽
+
+  * 无；
+* 方法
+
+  * 无；
+
+#### 气泡图（CBubbleChart）
+
+```
+<CBubbleChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    :exponent="0.1"
+    :aspect-ratio="1">
+</CBubbleChart>
+
+<CBubbleChart
+    url="/demos/chart-data2.json"
+    title="2014、2024年浏览器份额排行榜"
+    subtitle="近十年"
+    x-axis-title="浏览器"
+    y-axis-title="市占率"
+    y-axis-unit="%"
+    :exponent="0.1"
+    show-legend
+    multiple
+    :aspect-ratio="1">
+</CBubbleChart>
+```
+
+效果图：
+
+![CBubbleChart](./images/c-bubble-chart.png)
+
+* 属性
+
+  * 同`CLineChart`；
+* 事件
+
+  * 无；
+* 插槽
+
+  * 无；
+* 方法
+
+  * 无；
+
+#### 饼图（CPieChart）
+
+```
+<CPieChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    item-value="y"
+    value-unit="%"
+    :aspect-ratio="1">
+</CPieChart>
+```
+
+效果图：
+
+![CPieChart](./images/c-pie-chart.png)
+
+* 属性
+
+  * | 名称          | 描述                                                         | 类型               | 默认值  |
+    | ------------- | ------------------------------------------------------------ | ------------------ | ------- |
+    | `title`       | 标题                                                         | `string`           | `null`  |
+    | `subtitle`    | 副标题                                                       | `string`           | `null`  |
+    | `series`      | 数据集，`key-value`方式                                      | `array`            | `[]`    |
+    | `url`         | 数据集API访问地址，若`series`的值不为空，则以`series`的值为主 | `string`           | `null`  |
+    | `itemName`    | 名称对应的属性                                               | `string`           | `name`  |
+    | `itemValue`   | 值对应的属性                                                 | `string`           | `value` |
+    | `valueUnit`   | 值的单位                                                     | `string`           | `''`    |
+    | `aspectRatio` | 宽高比                                                       | `string`、`number` | `auto`  |
+    | `showLegend`  | 是否显示图例                                                 | `boolean`          | `false` |
+    | `rounded`     | 是否显示圆角分割                                             | `boolean`          | `false` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  * 无；
+
+#### 环形图（CDonutChart）
+
+```
+<CDonutChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    item-value="y"
+    value-unit="%"
+    :rounded="false"
+    :aspect-ratio="1">
+</CDonutChart>
+```
+
+效果图：
+
+![CDonutChart](./images/c-donut-chart.png)
+
+* 属性
+
+  * 同`CPieChart`；
+* 事件
+
+  * 无；
+* 插槽
+
+  * 无；
+* 方法
+
+  * 无；
+
+#### 半环形图（CHalfDonutChart）
+
+```
+<CHalfDonutChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    item-value="y"
+    value-unit="%"
+    :aspect-ratio="1">
+</CHalfDonutChart>
+```
+
+效果图：
+
+![CHalfDonutChart](./images/c-half-donut-chart.png)
+
+* 属性
+
+  * 同`CPieChart`；
+* 事件
+
+  * 无；
+* 插槽
+
+  * 无；
+* 方法
+
+  * 无；
+
+#### 鸡冠花图（CCoxcombChart）
+
+```
+<CCoxcombChart
+    url="/demos/chart-data1.json"
+    title="浏览器份额排行榜"
+    subtitle="2024"
+    item-value="y"
+    value-unit="%"
+    :aspect-ratio="1">
+</CCoxcombChart>
+```
+
+效果图：
+
+![CCoxcombChart](./images/c-coxcomb-chart.png)
+
+* 属性
+
+  * 同`CPieChart`；
+* 事件
+
+  * 无；
+* 插槽
+
+  * 无；
+* 方法
+
+  * 无；
 
 ### 统计（7）
 

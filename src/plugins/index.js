@@ -8,8 +8,8 @@ import Vuetify3Plus from '../lib';
 // Axios
 import {registerAxios} from './axios';
 
-// Highcharts
-import {registerHighcharts} from './highcharts';
+// ECharts
+import {registerECharts} from './echarts';
 
 // v-viewer
 import {registerViewer} from './viewer';
@@ -21,7 +21,7 @@ export function registerPlugins(app) {
     app.use(vuetify);
     app.use(Vuetify3Plus);
     registerAxios(app);
-    registerHighcharts(app);
+    registerECharts(app);
     registerViewer(app);
     registerCKEditor(app);
 }
