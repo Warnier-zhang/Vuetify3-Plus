@@ -174,7 +174,7 @@ CLoading.close();
   | `open`  | 显示加载 | 无   | 无     |
   | `close` | 关闭加载 | 无   | 无     |
 
-### 表单（10）
+### 表单（11）
 
 #### 密码（CPassword）
 
@@ -355,6 +355,45 @@ CLoading.close();
 
 * 方法
     * 无；
+
+#### 树形选择（CTree）
+
+```
+<CTree
+    v-model="productId"
+    label="商品"
+    url="/demos/products1.json"
+    variant="outlined"
+    density="compact"
+    multiple
+    clearable>
+</CTree>
+```
+
+效果图：
+
+![CTree](./images/c-tree.png)
+
+* 属性
+
+  * 同`CCascader`；
+
+  * | 名称         | 描述                                                         | 类型      | 默认值  |
+    | ------------ | ------------------------------------------------------------ | --------- | ------- |
+    | `simple`     | 是否支持简单数据格式，例如：`[{id: 1, title: "蔬菜"}, {id: 11, pid: 1, title: "白菜"}...]` | `boolean` | `false` |
+    | `itemParent` | 数据项父记录对应属性                                         | `string`  | `pid`   |
+
+* 事件
+
+  * 同`CCascader`；
+
+* 插槽
+
+  * 无；
+
+* 方法
+
+  * 无；
 
 #### 下拉选择（CSelect）
 

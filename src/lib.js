@@ -6,6 +6,7 @@ import CEmail from '@/components/form/CEmail.vue';
 import CDatePicker from '@/components/form/CDatePicker.vue';
 import CDatetimePicker from '@/components/form/CDatetimePicker.vue';
 import CCascader from '@/components/form/CCascader.vue';
+import CTree from '@/components/form/CTree.vue';
 import CSelect from '@/components/form/selection/CSelect.vue';
 import CAutocomplete from '@/components/form/selection/CAutocomplete.vue';
 import CChipGroup from '@/components/form/selection/CChipGroup.vue';
@@ -60,6 +61,7 @@ export {
     CDatePicker,
     CDatetimePicker,
     CCascader,
+    CTree,
     CSelect,
     CAutocomplete,
     CChipGroup,
@@ -114,6 +116,7 @@ const components = [
     CDatePicker,
     CDatetimePicker,
     CCascader,
+    CTree,
     CSelect,
     CAutocomplete,
     CChipGroup,

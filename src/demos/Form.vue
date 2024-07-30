@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-breadcrumbs :items="['控件', '表单（10）']"></v-breadcrumbs>
+        <v-breadcrumbs :items="['控件', '表单（11）']"></v-breadcrumbs>
 
         <v-row>
             <v-col cols="2">
@@ -65,18 +65,33 @@
             </v-col>
         </v-row>
 
-        <v-list-subheader>CCascader:</v-list-subheader>
         <v-row>
             <v-col cols="2">
+                <v-list-subheader>CCascader:</v-list-subheader>
+
                 <CCascader
                     v-model="productId"
                     label="商品"
                     url="/demos/products1.json"
                     variant="outlined"
                     density="compact"
-                    :multiple="true"
+                    multiple
                     clearable>
                 </CCascader>
+            </v-col>
+
+            <v-col cols="2">
+                <v-list-subheader>CTree:</v-list-subheader>
+
+                <CTree
+                    v-model="productId"
+                    label="商品"
+                    url="/demos/products1.json"
+                    variant="outlined"
+                    density="compact"
+                    multiple
+                    clearable>
+                </CTree>
             </v-col>
         </v-row>
 
