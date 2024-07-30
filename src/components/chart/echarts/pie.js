@@ -67,7 +67,8 @@ export function usePie($http, type, props) {
                 let value = params.value[props.itemValue];
                 let percent = percentage(params.percent / 100);
                 return `<span class="text-caption">${name}：</span><span class="font-weight-bold">${value}${props.valueUnit}</span><span class="text-caption">（占<span class="font-weight-bold">${percent}</span>）</span>`;
-            }
+            },
+            confine: true,
         },
         legend: {
             show: props.showLegend,

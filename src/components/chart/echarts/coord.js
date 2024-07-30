@@ -50,6 +50,14 @@ export const coordProps = {
         type: String,
         default: ''
     },
+    yAxisMin: {
+        type: [String, Number],
+        default: null
+    },
+    yAxisMax: {
+        type: [String, Number],
+        default: null
+    },
     series: {
         type: Array,
         default: () => []
@@ -90,6 +98,10 @@ export const coordProps = {
         type: String,
         default: 'name'
     },
+    nameTitle: {
+        type: String,
+        default: ''
+    },
     itemX: {
         type: String,
         default: 'x'
@@ -98,9 +110,21 @@ export const coordProps = {
         type: String,
         default: 'y'
     },
+    itemZ: {
+        type: String,
+        default: null
+    },
+    pointSize: {
+        type: Number,
+        default: 10
+    },
     exponent: {
         type: [String, Number],
         default: 1
+    },
+    lines: {
+        type: Array,
+        default: () => []
     },
     aspectRatio: {
         type: [String, Number],
@@ -138,16 +162,22 @@ export function useCoord($http, type, props) {
             scale: props.yAxisScale,
             axisLabel: {
                 formatter: `{value}${props.yAxisUnit}`
-            }
+            },
+            min: props.yAxisMin,
+            max: props.yAxisMax,
         },
         tooltip: {
             trigger: !props.showPoint || props.multiple ? 'axis' : 'item',
             formatter(params) {
                 let tooltip = '';
                 if (chartOptions.value.tooltip.trigger === 'item') {
-                    tooltip = `<span class="text-caption">${props.xAxisTitle}：</span><span class="font-weight-bold">${params.value[props.itemX]}</span><br/><span class="text-caption">${props.yAxisTitle}：</span><span class="font-weight-bold">${params.value[props.itemY]}${props.yAxisUnit}</span>`;
-                    if (type === 'bubble') {
-                        tooltip = `<span class="text-caption">名称：</span><span class="font-weight-bold">${params.value[props.itemName]}</span><br/>` + tooltip;
+                    if (params.componentType === 'series') {
+                        tooltip = `<span class="text-caption">${props.xAxisTitle}：</span><span class="font-weight-bold">${params.value[props.itemX]}</span><br/><span class="text-caption">${props.yAxisTitle}：</span><span class="font-weight-bold">${params.value[props.itemY]}${props.yAxisUnit}</span>`;
+                        if (type === 'bubble') {
+                            tooltip = `<span class="text-caption">${props.nameTitle}：</span><span class="font-weight-bold">${params.value[props.itemName]}</span><br/>` + tooltip;
+                        }
+                    } else if (params.componentType === 'markLine') {
+                        tooltip = `<span class="text-caption">${params.name}：</span><span class="font-weight-bold">${params.value}</span>`;
                     }
                 } else if (chartOptions.value.tooltip.trigger === 'axis') {
                     let x = params[0].value[props.itemX];
@@ -157,7 +187,8 @@ export function useCoord($http, type, props) {
                     }
                 }
                 return tooltip;
-            }
+            },
+            confine: true,
         },
         legend: {
             show: props.showLegend,
@@ -263,6 +294,9 @@ export function useCoord($http, type, props) {
                 focus: props.multiple ? 'none' : 'self',
             },
             smooth: props.smooth,
+            markLine: {
+                data: props.lines,
+            }
         };
         if (type === 'area') {
             serie['areaStyle'] = {};
@@ -277,9 +311,13 @@ export function useCoord($http, type, props) {
                 shadowColor: '#9E9E9E',
                 shadowOffsetY: 5,
             };
-            serie['symbolSize'] = function (value) {
-                return Math.abs(value[props.itemY]) / Math.pow(10, props.exponent);
-            };
+            if (props.itemZ) {
+                serie['symbolSize'] = function (value) {
+                    return Math.abs(value[props.itemZ]) / Math.pow(10, props.exponent);
+                };
+            } else {
+                serie['symbolSize'] = props.pointSize;
+            }
         } else if (type === 'column') {
             if (props.stacked) {
                 serie['stack'] = 'total';
@@ -313,6 +351,26 @@ export function useCoord($http, type, props) {
         },
         {
             immediate: true
+        }
+    );
+
+    watch(
+        () => props.yAxisMin,
+        (value) => {
+            chartOptions.value.yAxis.min = value;
+        },
+        {
+            immediate: true,
+        }
+    );
+
+    watch(
+        () => props.yAxisMax,
+        (value) => {
+            chartOptions.value.yAxis.max = value;
+        },
+        {
+            immediate: true,
         }
     );
 

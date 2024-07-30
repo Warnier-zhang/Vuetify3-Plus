@@ -109,6 +109,8 @@
                     x-axis-title="浏览器"
                     y-axis-title="市占率"
                     y-axis-unit="%"
+                    name-title="名称"
+                    item-z="y"
                     :exponent="0.1"
                     :aspect-ratio="1">
                 </CBubbleChart>
@@ -124,6 +126,7 @@
                     x-axis-title="浏览器"
                     y-axis-title="市占率"
                     y-axis-unit="%"
+                    item-z="y"
                     :exponent="0.1"
                     show-legend
                     multiple
