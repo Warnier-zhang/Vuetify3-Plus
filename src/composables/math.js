@@ -21,19 +21,6 @@ export function useMath() {
         }
     };
 
-    const compare = (a, b) => {
-        if (isNaN(a) || isNaN(b)) {
-            return '';
-        }
-        if (a > b) {
-            return 'text-red';
-        } else if (a < b) {
-            return 'text-green';
-        } else {
-            return '';
-        }
-    };
-
     const currency = (value) => {
         if (value <= -1e8 || value >= 1e8) {
             return `${round(value / 1e8)}亿`;
@@ -45,5 +32,5 @@ export function useMath() {
             return round(value);
         }
     };
-    return {round, percentage, compare, currency};
+    return {round, percentage, currency};
 }
