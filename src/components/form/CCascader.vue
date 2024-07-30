@@ -2,6 +2,7 @@
     <v-text-field
         v-bind="$attrs"
         :model-value="title"
+        :title="title"
         readonly
         @click:clear="onResetClick">
         <v-menu
@@ -11,15 +12,6 @@
             :close-on-content-click="false">
             <v-card :title="`选择${$attrs.label}`">
                 <template v-slot:append>
-                    <!--
-                    <v-btn
-                        @click="onClearAllClick"
-                        color="primary"
-                        variant="tonal"
-                        size="x-small"
-                        icon="mdi-delete-sweep">
-                    </v-btn>
-                    -->
                     <v-icon
                         @click="onClearAllClick"
                         size="small">
@@ -30,6 +22,18 @@
                 <v-card-text
                     class="py-0"
                     style="max-width: 302px;">
+                    <v-text-field
+                        v-model="tabTitle"
+                        placeholder="过滤"
+                        variant="outlined"
+                        density="compact"
+                        prepend-inner-icon="mdi-filter"
+                        hide-details
+                        @change="onFilter"
+                        clearable
+                        @click:clear="tabTitle = null">
+                    </v-text-field>
+
                     <v-tabs
                         v-model="tab"
                         center-active
@@ -177,18 +181,22 @@ function convertValueToArray(rawValue) {
 function onOKClick() {
     emit('update:modelValue', value.value);
     showMenu.value = false;
+    tabTitle.value = null;
 }
 
 function onCancelClick() {
+    tabTitle.value = null;
     value.value = convertValue(props.modelValue);
     showMenu.value = false;
 }
 
 function onClearAllClick() {
+    tabTitle.value = null;
     value.value = convertValue(null);
 }
 
 function onResetClick() {
+    tabTitle.value = null;
     value.value = convertValue(null);
     emit('update:modelValue', value.value);
 }
@@ -236,6 +244,26 @@ watch(
         immediate: true
     }
 );
+
+const tabTitle = ref(null);
+
+function onFilter() {
+    if (showMenu.value && isNotEmpty(data.value)) {
+        for (let item of data.value) {
+            if (item[props.itemTitle].includes(tabTitle.value)) {
+                tab.value = item[props.itemId];
+                break;
+            } else if (isNotEmpty(item[props.itemChildren])) {
+                for (let option of item[props.itemChildren]) {
+                    if (option[props.itemTitle].includes(tabTitle.value)) {
+                        tab.value = item[props.itemId];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
 
 const title = computed(() => {
     let titles = [];
