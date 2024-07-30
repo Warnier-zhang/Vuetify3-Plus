@@ -580,16 +580,22 @@ CLoading.close();
     | `yAxisTitle`    | Y轴名称                                                      | `string`           | `null`      |
     | `yAxisScale`    | Y轴是否不从0开始                                             | `boolean`          | `false`     |
     | `yAxisUnit`     | Y轴单位                                                      | `string`           | `null`      |
+    | `yAxisMin`      | Y轴最小值                                                    | `string`、`number` | `null`      |
+    | `yAxisMax`      | Y轴最大值                                                    | `string`、`number` | `null`      |
     | `series`        | 数据集，`key-value`方式                                      | `array`            | `[]`        |
     | `url`           | 数据集API访问地址，若`series`的值不为空，则以`series`的值为主 | `string`           | `null`      |
     | `itemSerieName` | 序列名称对应的属性                                           | `string`           | `serieName` |
     | `itemName`      | 点名称对应的属性                                             | `string`           | `name`      |
+    | `nameTitle`     | 点名称的标题，**适用于气泡图**                               | `string`           | `''`        |
     | `itemX`         | X轴对应的属性                                                | `string`           | `x`         |
     | `itemY`         | Y轴对应的属性                                                | `string`           | `y`         |
+    | `itemZ`         | Z轴对应的属性，配合`pointSize`属性，用于确定气泡大小，**适用于气泡图** | `string`           | `null`      |
+    | `pointSize`     | 气泡大小                                                     | `number`           | `10`        |
     | `aspectRatio`   | 宽高比                                                       | `string`、`number` | `auto`      |
     | `multiple`      | 是否支持多个序列                                             | `boolean`          | `false`     |
     | `showPoint`     | 是否显示点                                                   | `boolean`          | `true`      |
     | `showLegend`    | 是否显示图例                                                 | `boolean`          | `false`     |
+    | `lines`         | 划线                                                         | `array`            | `[]`        |
     | `smooth`        | 是否显示平滑曲线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
     | `steped`        | 是否显示梯形折线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
     | `stacked`       | 是否折叠，**适用于柱形图**                                   | `boolean`          | `false`     |
@@ -1202,14 +1208,13 @@ CLoading.close();
 
 * 属性
 
-  * | 名称       | 描述         | 类型      | 默认值  |
-    | ---------- | ------------ | --------- | ------- |
-    | `text`     | 名称         | `string`  | `null`  |
-    | `href`     | 链接         | `string`  | `null`  |
-    | `disabled` | 是否禁用     | `boolean` | `false` |
-    | `showHint` | 是否显示提示 | `boolean` | `false` |
-    | `hint`     | 提示         | `string`  | `null`  |
-
+  * | 名称       | 描述     | 类型      | 默认值  |
+    | ---------- | -------- | --------- | ------- |
+    | `text`     | 名称     | `string`  | `null`  |
+    | `href`     | 链接     | `string`  | `null`  |
+    | `disabled` | 是否禁用 | `boolean` | `false` |
+    | `hint`     | 提示     | `string`  | `null`  |
+  
 * 事件
 
   * 无；

@@ -45,9 +45,7 @@
 在克隆下来的项目源码中，执行`npm run dev`脚本，然后，访问http://localhost:5173
 
 ## 使用指南
-
 ### 表格
-
 ### 交互（3）
 
 #### 消息框（CMessage）
@@ -131,14 +129,14 @@ CModal.prompt({
 
 * 方法
 
-  | 名称      | 描述                             | 参数       | 返回值 |
-  | --------- | -------------------------------- | ---------- | ------ |
-  | `alert`   | 显示警告弹窗，并等待用户关闭     | `[object]` | 无     |
-  | `confirm` | 显示确认弹窗，并等待用户确定     | `[object]` | 无     |
-  | `prompt`  | 显示输入弹窗，并返回用户输入结果 | `[object]` | 无     |
-
+  | 名称      | 描述                             | 参数          | 返回值 |
+  | --------- |-------------| ---------- | ------ |
+  | `alert`   | 显示警告弹窗，并等待用户关闭     | `[object]`  | 无     |
+  | `confirm` | 显示确认弹窗，并等待用户确定     | `[object]`  | 无     |
+  | `prompt`  | 显示输入弹窗，并返回用户输入结果 | `[object]`  | 无     |
+  
   参数说明：
-
+  
   ```
   {
       title: 标题,
@@ -176,7 +174,7 @@ CLoading.close();
   | `open`  | 显示加载 | 无   | 无     |
   | `close` | 关闭加载 | 无   | 无     |
 
-### 表单（10）
+### 表单（11）
 
 #### 密码（CPassword）
 
@@ -188,22 +186,20 @@ CLoading.close();
     clearable>
 </CPassword>
 ```
-
 效果图：
 
-![CPassword](D:\CodeLabs\Vuetify3-Plus-Github\images\c-password.png)
+![CPassword](./images/c-password.png)
 
 * 属性
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 验证码（CCaptcha）
-
 ```
 <CCaptcha
     v-model="captcha"
@@ -213,35 +209,29 @@ CLoading.close();
     clearable>
 </CCaptcha>
 ```
-
 效果图：
 
-![CCaptcha](D:\CodeLabs\Vuetify3-Plus-Github\images\c-captcha.png)
+![CCaptcha](./images/c-captcha.png)
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称  | 描述           | 类型     | 默认值 |
-    | ----- | -------------- | -------- | ------ |
-    | `url` | 验证码图片地址 | `string` | `null` |
+    * | 名称  | 描述           | 类型     | 默认值 |
+      | ----- | -------------- | -------- | ------ |
+      | `url` | 验证码图片地址 | `string` | `null` |
 
 * 事件
-
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-
-  * 无；
+    * 无；
 
 * 方法
-
-  * 无；
+    * 无；
 
 #### 邮件（CEmail）
-
 邮件地址输入自动补全。
-
 ```
 <CEmail
     v-model="email"
@@ -250,33 +240,28 @@ CLoading.close();
     clearable>
 </CEmail>
 ```
-
 效果图：
 
-![CEmail](D:\CodeLabs\Vuetify3-Plus-Github\images\c-email.png)
+![CEmail](./images/c-email.png)
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称      | 描述       | 类型    | 默认值                                                       |
-    | --------- | ---------- | ------- | ------------------------------------------------------------ |
-    | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
+    * | 名称      | 描述       | 类型    | 默认值                                                       |
+        | --------- | ---------- | ------- | ------------------------------------------------------------ |
+        | `servers` | 邮件服务器 | `array` | `['gmail.com', 'qq.com', '163.com', 'vip.163.com', '126.com', 'vip.126.com', 'outlook.com', 'hotmail.com', 'foxmail.com', '139.com', '188.com']` |
 
 * 事件
-
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-
-  * 无；
+    * 无；
 
 * 方法
-
-  * 无；
+    * 无；
 
 #### 日期选择（CDatePicker）
-
 ```
 <CDatePicker
     v-model="date"
@@ -286,22 +271,20 @@ CLoading.close();
     clearable>
 </CDatePicker>
 ```
-
 效果图：
 
-![CDatePicker](D:\CodeLabs\Vuetify3-Plus-Github\images\c-datepicker.png)
+![CDatePicker](./images/c-datepicker.png)
 
 * 属性
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 事件
-  * 同`VTextField`；
+    * 同`VTextField`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 日期时间选择（CDatetimePicker）
-
 ```
 <CDatetimePicker
     v-model="time"
@@ -312,35 +295,30 @@ CLoading.close();
     clearable>
 </CDatetimePicker>
 ```
-
 效果图：
 
-![CDatetimePicker](D:\CodeLabs\Vuetify3-Plus-Github\images\c-datetimepicker.png)
+![CDatetimePicker](./images/c-datetimepicker.png)
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称         | 描述                                                     | 类型      | 默认值       |
-    | ------------ | -------------------------------------------------------- | --------- | ------------ |
-    | `pickSecond` | 是否允许选择秒                                           | `boolean` | `false`      |
-    | `dateFormat` | 日期格式                                                 | `string`  | `yyyy-MM-dd` |
-    | `timeFormat` | 时间格式，值可由用户自定义，或者根据`pickSecond`的值变化 | `string`  | `HH:mm`      |
+    * | 名称         | 描述                                                     | 类型      | 默认值       |
+      | ------------ | -------------------------------------------------------- | --------- | ------------ |
+      | `pickSecond` | 是否允许选择秒                                           | `boolean` | `false`      |
+      | `dateFormat` | 日期格式                                                 | `string`  | `yyyy-MM-dd` |
+      | `timeFormat` | 时间格式，值可由用户自定义，或者根据`pickSecond`的值变化 | `string`  | `HH:mm`      |
 
 * 事件
-
-  * 同`VTextField`；
+    * 同`VTextField`；
 
 * 插槽
-
-  * 无；
+    * 无；
 
 * 方法
-
-  * 无；
+    * 无；
 
 #### 级联选择（CCascader）
-
 ```
 <CCascader
     v-model="productId1"
@@ -352,27 +330,62 @@ CLoading.close();
     clearable>
 </CCascader>
 ```
-
 效果图：
 
-![CCascader](D:\CodeLabs\Vuetify3-Plus-Github\images\c-cascader.png)
+![CCascader](./images/c-cascader.png)
 
 * 属性
 
-  * 同`VTextField`；
+    * 同`VTextField`；
 
-  * | 名称           | 描述                                                    | 类型      | 默认值     |
-    | -------------- | ------------------------------------------------------- | --------- | ---------- |
-    | `items`        | 数据集                                                  | `array`   | `[]`       |
-    | `url`          | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string`  | `null`     |
-    | `itemId`       | 数据项的值对应属性                                      | `string`  | `id`       |
-    | `itemTitle`    | 数据项名称对应属性                                      | `string`  | `title`    |
-    | `itemChildren` | 数据项子集对应属性                                      | `string`  | `children` |
-    | `multiple`     | 是否允许多选                                            | `boolean` | `false`    |
+    * | 名称           | 描述                                                    | 类型      | 默认值     |
+      | -------------- | ------------------------------------------------------- | --------- | ---------- |
+      | `items`        | 数据集                                                  | `array`   | `[]`       |
+      | `url`          | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string`  | `null`     |
+      | `itemId`       | 数据项的值对应属性                                      | `string`  | `id`       |
+      | `itemTitle`    | 数据项名称对应属性                                      | `string`  | `title`    |
+      | `itemChildren` | 数据项子集对应属性                                      | `string`  | `children` |
+      | `multiple`     | 是否允许多选                                            | `boolean` | `false`    |
+
+* 事件
+    * 同`VTextField`；
+
+* 插槽
+    * 无；
+
+* 方法
+    * 无；
+
+#### 树形选择（CTree）
+
+```
+<CTree
+    v-model="productId"
+    label="商品"
+    url="/demos/products1.json"
+    variant="outlined"
+    density="compact"
+    multiple
+    clearable>
+</CTree>
+```
+
+效果图：
+
+![CTree](./images/c-tree.png)
+
+* 属性
+
+  * 同`CCascader`；
+
+  * | 名称         | 描述                                                         | 类型      | 默认值  |
+    | ------------ | ------------------------------------------------------------ | --------- | ------- |
+    | `simple`     | 是否支持简单数据格式，例如：`[{id: 1, title: "蔬菜"}, {id: 11, pid: 1, title: "白菜"}...]` | `boolean` | `false` |
+    | `itemParent` | 数据项父记录对应属性                                         | `string`  | `pid`   |
 
 * 事件
 
-  * 同`VTextField`；
+  * 同`CCascader`；
 
 * 插槽
 
@@ -400,26 +413,26 @@ CLoading.close();
 
 * 属性
 
-  * 同`VSelect`；
+    * 同`VSelect`；
 
-  * | 名称        | 描述                                                    | 类型     | 默认值  |
-    | ----------- | ------------------------------------------------------- | -------- | ------- |
-    | `items`     | 数据集                                                  | `array`  | `[]`    |
-    | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
-    | `itemValue` | 数据项的值对应属性                                      | `string` | `value` |
-    | `itemTitle` | 数据项名称对应属性                                      | `string` | `title` |
+    * | 名称        | 描述                                                    | 类型     | 默认值  |
+      | ----------- | ------------------------------------------------------- | -------- | ------- |
+      | `items`     | 数据集                                                  | `array`  | `[]`    |
+      | `url`       | 数据集API地址，若`items`的值不为空，则以`items`的值为主 | `string` | `null`  |
+      | `itemValue` | 数据项的值对应属性                                      | `string` | `value` |
+      | `itemTitle` | 数据项名称对应属性                                      | `string` | `title` |
 
 * 事件
 
-  * 同`VSelect`；
+    * 同`VSelect`；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
 
 #### 自动补全（CAutocomplete）
 
@@ -436,13 +449,13 @@ CLoading.close();
 ```
 
 * 属性
-  * 同`VAutocomplete`和`CSelect`；
+    * 同`VAutocomplete`和`CSelect`；
 * 事件
-  * 同`VAutocomplete`；
+    * 同`VAutocomplete`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 纸片组（CChipGroup）
 
@@ -460,17 +473,17 @@ CLoading.close();
 
 效果图：
 
-![CChipGroup](D:\CodeLabs\Vuetify3-Plus-Github\images\c-chipgroup.png)
+![CChipGroup](./images/c-chipgroup.png)
 
 * 属性
-  * 同`VChipGroup`和`CSelect`；
-  * 前缀是`chip-`的属性同`VChip`；
+    * 同`VChipGroup`和`CSelect`；
+    * 前缀是`chip-`的属性同`VChip`；
 * 事件
-  * 同`VChipGroup`；
+    * 同`VChipGroup`；
 * 插槽
-  * 无；
+    * 无；
 * 方法
-  * 无；
+    * 无；
 
 #### 上传文件（CFileUpload）
 
@@ -490,32 +503,32 @@ CLoading.close();
 
 效果图：
 
-![CFileUpload](D:\CodeLabs\Vuetify3-Plus-Github\images\c-fileupload1.png)
+![CFileUpload](./images/c-fileupload1.png)
 
-![CFileUpload](D:\CodeLabs\Vuetify3-Plus-Github\images\c-fileupload2.png)
+![CFileUpload](./images/c-fileupload2.png)
 
-![CFileUpload](D:\CodeLabs\Vuetify3-Plus-Github\images\c-fileupload3.png)
+![CFileUpload](./images/c-fileupload3.png)
 
 * 属性
 
-  * 同`VFileInput`；
+    * 同`VFileInput`；
 
-  * | 名称            | 描述                                                         | 类型     | 默认值 |
-    | --------------- | ------------------------------------------------------------ | -------- | ------ |
-    | `uploadFileUrl` | 文件上传地址，该API需要接收参数`upload`，返回文件信息，文件信息包含名称、缩略图、类型等。文件类型同MIME。 | `string` | `null` |
-    | `browseFileUrl` | 文件预览、下载地址，该API需要接收参数`id`（文件ID），并且支持`HEAD`方法，响应头中包含文件信息`file-info`。 | `string` | `null` |
+    * | 名称            | 描述                                                         | 类型     | 默认值 |
+      | --------------- | ------------------------------------------------------------ | -------- | ------ |
+      | `uploadFileUrl` | 文件上传地址，该API需要接收参数`upload`，返回文件信息，文件信息包含名称、缩略图、类型等。文件类型同MIME。 | `string` | `null` |
+      | `browseFileUrl` | 文件预览、下载地址，该API需要接收参数`id`（文件ID），并且支持`HEAD`方法，响应头中包含文件信息`file-info`。 | `string` | `null` |
 
 * 事件
 
-  * 同`VFileInput`；
+    * 同`VFileInput`；
 
 * 插槽
 
-  * 无；
+    * 无；
 
 * 方法
 
-  * 无；
+    * 无；
 
 ### 图表（8）
 
@@ -552,7 +565,7 @@ CLoading.close();
 
 效果图：
 
-![CLineChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-line-chart.png)
+![CLineChart](./images/c-line-chart.png)
 
 * 属性
 
@@ -567,16 +580,22 @@ CLoading.close();
     | `yAxisTitle`    | Y轴名称                                                      | `string`           | `null`      |
     | `yAxisScale`    | Y轴是否不从0开始                                             | `boolean`          | `false`     |
     | `yAxisUnit`     | Y轴单位                                                      | `string`           | `null`      |
+    | `yAxisMin`      | Y轴最小值                                                    | `string`、`number` | `null`      |
+    | `yAxisMax`      | Y轴最大值                                                    | `string`、`number` | `null`      |
     | `series`        | 数据集，`key-value`方式                                      | `array`            | `[]`        |
     | `url`           | 数据集API访问地址，若`series`的值不为空，则以`series`的值为主 | `string`           | `null`      |
     | `itemSerieName` | 序列名称对应的属性                                           | `string`           | `serieName` |
     | `itemName`      | 点名称对应的属性                                             | `string`           | `name`      |
+    | `nameTitle`     | 点名称的标题，**适用于气泡图**                               | `string`           | `''`        |
     | `itemX`         | X轴对应的属性                                                | `string`           | `x`         |
     | `itemY`         | Y轴对应的属性                                                | `string`           | `y`         |
+    | `itemZ`         | Z轴对应的属性，配合`pointSize`属性，用于确定气泡大小，**适用于气泡图** | `string`           | `null`      |
+    | `pointSize`     | 气泡大小                                                     | `number`           | `10`        |
     | `aspectRatio`   | 宽高比                                                       | `string`、`number` | `auto`      |
     | `multiple`      | 是否支持多个序列                                             | `boolean`          | `false`     |
     | `showPoint`     | 是否显示点                                                   | `boolean`          | `true`      |
     | `showLegend`    | 是否显示图例                                                 | `boolean`          | `false`     |
+    | `lines`         | 划线                                                         | `array`            | `[]`        |
     | `smooth`        | 是否显示平滑曲线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
     | `steped`        | 是否显示梯形折线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
     | `stacked`       | 是否折叠，**适用于柱形图**                                   | `boolean`          | `false`     |
@@ -622,7 +641,7 @@ CLoading.close();
 
 效果图：
 
-![CAreaChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-area-chart.png)
+![CAreaChart](./images/c-area-chart.png)
 
 * 属性
 
@@ -666,7 +685,7 @@ CLoading.close();
 
 效果图：
 
-![CColumnChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-column-chart.png)
+![CColumnChart](./images/c-column-chart.png)
 
 * 属性
 
@@ -711,7 +730,7 @@ CLoading.close();
 
 效果图：
 
-![CBubbleChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-bubble-chart.png)
+![CBubbleChart](./images/c-bubble-chart.png)
 
 * 属性
 
@@ -741,7 +760,7 @@ CLoading.close();
 
 效果图：
 
-![CPieChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-pie-chart.png)
+![CPieChart](./images/c-pie-chart.png)
 
 * 属性
 
@@ -786,7 +805,7 @@ CLoading.close();
 
 效果图：
 
-![CDonutChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-donut-chart.png)
+![CDonutChart](./images/c-donut-chart.png)
 
 * 属性
 
@@ -816,7 +835,7 @@ CLoading.close();
 
 效果图：
 
-![CHalfDonutChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-half-donut-chart.png)
+![CHalfDonutChart](./images/c-half-donut-chart.png)
 
 * 属性
 
@@ -846,7 +865,7 @@ CLoading.close();
 
 效果图：
 
-![CCoxcombChart](D:\CodeLabs\Vuetify3-Plus-Github\images\c-coxcomb-chart.png)
+![CCoxcombChart](./images/c-coxcomb-chart.png)
 
 * 属性
 
@@ -877,7 +896,7 @@ CLoading.close();
 
 效果图：
 
-![CStat1](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat1.png)
+![CStat1](./images/c-stat1.png)
 
 * 属性
 
@@ -917,7 +936,7 @@ CLoading.close();
 
 效果图：
 
-![CStat2](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat2.png)
+![CStat2](./images/c-stat2.png)
 
 * 属性
 
@@ -959,7 +978,7 @@ CLoading.close();
 
 效果图：
 
-![CStat3](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat3.png)
+![CStat3](./images/c-stat3.png)
 
 * 属性
 
@@ -1000,7 +1019,7 @@ CLoading.close();
 
 效果图：
 
-![CStat4](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat4.png)
+![CStat4](./images/c-stat4.png)
 
 * 属性
 
@@ -1043,7 +1062,7 @@ CLoading.close();
 
 效果图：
 
-![CStat5](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat5.png)
+![CStat5](./images/c-stat5.png)
 
 * 属性
 
@@ -1080,7 +1099,7 @@ CLoading.close();
 
 效果图：
 
-![CStat6](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat6.png)
+![CStat6](./images/c-stat6.png)
 
 * 属性
 
@@ -1125,7 +1144,7 @@ CLoading.close();
 
 效果图：
 
-![CStat7](D:\CodeLabs\Vuetify3-Plus-Github\images\c-stat7.png)
+![CStat7](./images/c-stat7.png)
 
 * 属性
 
@@ -1163,9 +1182,9 @@ CLoading.close();
 
 效果图：
 
-![CImg](D:\CodeLabs\Vuetify3-Plus-Github\images\c-img1.png)
+![CImg](./images/c-img1.png)
 
-![CPassword](D:\CodeLabs\Vuetify3-Plus-Github\images\c-img2.png)
+![CPassword](./images/c-img2.png)
 
 * 属性
   * 同`VImg`；
@@ -1189,14 +1208,13 @@ CLoading.close();
 
 * 属性
 
-  * | 名称       | 描述         | 类型      | 默认值  |
-    | ---------- | ------------ | --------- | ------- |
-    | `text`     | 名称         | `string`  | `null`  |
-    | `href`     | 链接         | `string`  | `null`  |
-    | `disabled` | 是否禁用     | `boolean` | `false` |
-    | `showHint` | 是否显示提示 | `boolean` | `false` |
-    | `hint`     | 提示         | `string`  | `null`  |
-
+  * | 名称       | 描述     | 类型      | 默认值  |
+    | ---------- | -------- | --------- | ------- |
+    | `text`     | 名称     | `string`  | `null`  |
+    | `href`     | 链接     | `string`  | `null`  |
+    | `disabled` | 是否禁用 | `boolean` | `false` |
+    | `hint`     | 提示     | `string`  | `null`  |
+  
 * 事件
 
   * 无；
@@ -1254,7 +1272,7 @@ CLoading.close();
 
 效果图：
 
-![CSpinner](D:\CodeLabs\Vuetify3-Plus-Github\images\c-spinner.png)
+![CSpinner](./images/c-spinner.png)
 
 * 属性
 
@@ -1289,7 +1307,7 @@ CLoading.close();
 
 效果图：
 
-![CCKEditor5](D:\CodeLabs\Vuetify3-Plus-Github\images\c-ckeditor5.png)
+![CCKEditor5](./images/c-ckeditor5.png)
 
 * 属性
 
