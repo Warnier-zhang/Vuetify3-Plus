@@ -4,14 +4,14 @@
         color="primary"
         :href="href"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         variant="text"
         :disabled="disabled"
         :ripple="false">
         {{ text }}
 
         <v-tooltip
-            v-if="showHint"
+            v-if="hint"
             activator="parent"
             location="top">
             {{ hint }}
@@ -32,10 +32,6 @@ const props = defineProps({
     hint: {
         type: String,
         default: null
-    },
-    showHint: {
-        type: [Boolean, String],
-        default: false
     },
     href: {
         type: String,
