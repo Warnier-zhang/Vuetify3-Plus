@@ -45,7 +45,173 @@
 在克隆下来的项目源码中，执行`npm run dev`脚本，然后，访问http://localhost:5173
 
 ## 使用指南
-### 表格
+### 表格（3）
+
+#### 增删改查表格（CCrudTable）
+
+扩展自`VDataTableServer`组件，在保留`VDataTableServer`用法、优点的基础上，参考**EasyUI**、**miniUI**时代的`DataGrid`，进一步封装查询、新增、更新、删除、过滤、刷新、导出Excel等操作逻辑。
+
+```
+<CCrudTable
+    title="文件资源管理器"
+    :columns="columns"
+    fixed-index
+    load-items-url="/api/file-explorer/files/search"
+    add-item-url="/api/file-explorer/files/save"
+    update-item-url="/api/file-explorer/files/save"
+    remove-item-url="/api/file-explorer/files/delete"
+    show-refresh-btn
+    show-export-btn
+    show-icon-btn
+    row-key="id"
+    row-title="name">
+	...
+
+    <template v-slot:filter="{ conditions }">
+		...
+    </template>
+    
+    ...
+    
+    <template v-slot:editor="{ editedItem, type }">
+		...
+    </template>
+    
+    ...
+</CCrudTable>
+```
+
+[完整的示例参考Table1.vue](./src/demos/Table1.vue)
+
+效果图：
+
+![CCrudTable](./images/c-crud-table1.png)
+
+![CCrudTable](./images/c-crud-table2.png)
+
+![CCrudTable](./images/c-crud-table3.png)
+
+![CCrudTable](./images/c-crud-table4.png)
+
+* 属性
+
+  * | 名称                 | 描述                                                         | 类型      | 默认值   |
+    | -------------------- | ------------------------------------------------------------ | --------- | -------- |
+    | `title`              | 标题                                                         | `string`  | `null`   |
+    | `columns`            | 表头列，同`VDataTableServer`的`headers`属性                  | `array`   | `[]`     |
+    | `total`              | 数据集总数，同`VDataTableServer`的`items-length`属性         | `array`   | `0`      |
+    | `data`               | 数据集记录，同`VDataTableServer`的`items`属性                | `array`   | `[]`     |
+    | `showIndex`          | 是否显示序号列                                               | `boolean` | `true`   |
+    | `fixedIndex`         | 是否固定序号列                                               | `boolean` | `false`  |
+    | `showOperation`      | 是否显示操作列                                               | `boolean` | `true`   |
+    | `showIconBtn`        | 是否显示图标按钮                                             | `boolean` | `false`  |
+    | `showAddBtn`         | 是否显示新增按钮                                             | `boolean` | `true`   |
+    | `showRefreshBtn`     | 是否显示刷新按钮                                             | `boolean` | `false`  |
+    | `showFilterBtn`      | 是否显示过滤按钮                                             | `boolean` | `true`   |
+    | `showExportBtn`      | 是否显示导出按钮                                             | `boolean` | `false`  |
+    | `showUpdateBtn`      | 是否显示更新按钮                                             | `boolean` | `true`   |
+    | `showDeleteBtn`      | 是否显示删除按钮                                             | `boolean` | `true`   |
+    | `loadItemsUrl`       | 加载记录API地址，返回值必须包含`total`、`items`属性，例如：`{total: 10, items: [{...}, ...]}` | `string`  | `null`   |
+    | `loadItemsImmediate` | 是否立即加载                                                 | `boolean` | `true`   |
+    | `filterCondition`    | 默认的过滤条件                                               | `object`  | `{}`     |
+    | `addItemUrl`         | 新增记录API地址                                              | `string`  | `null`   |
+    | `updateItemUrl`      | 更新记录API地址                                              | `string`  | `null`   |
+    | `removeItemUrl`      | 删除记录API地址                                              | `string`  | `null`   |
+    | `rowKey`             | 记录ID对应的属性                                             | `string`  | `null`   |
+    | `rowTitle`           | 记录名称对应的属性                                           | `string`  | `null`   |
+    | `sortMode`           | 排序模式，可选值有`client`、`server`，支持客户端、服务端排序 | `string`  | `server` |
+    | `sortKey`            | 默认的排序属性                                               | `string`  | `null`   |
+    | `sortOrder`          | 默认的排序顺序                                               | `string`  | `null`   |
+    | `disablePagination`  | 是否禁用分页                                                 | `boolean` | `false`  |
+    | `widthPadding`       | 多余的宽度，用于计算表格宽度，实现宽度自适应                 | `number`  | `-1`     |
+    | `heightPadding`      | 多余的高度，用于计算表格高度，实现高度自适应                 | `number`  | `-1`     |
+
+  * 其中，`columns`属性：
+
+    * 同`VDataTableServer`的`headers`属性；
+
+    * | 名称         | 描述                                                         | 类型       | 默认值      |
+      | ------------ | ------------------------------------------------------------ | ---------- | ----------- |
+      | `type`       | 列类型，若值为`code`，则是代码类型，代码列的最终显示由`codes`，或`url`加载到代码集确定 | `string`   | `null`      |
+      | `codes`      | 代码集                                                       | `array`    | `[]`        |
+      | `url`        | 代码集API地址，若`codes`的值不为空，则以`codes`的值为主      | `string`   | `null`      |
+      | `codeName`   | 代码名称对应的属性                                           | `string`   | `null`      |
+      | `codeValue`  | 代码值对应的属性                                             | `string`   | `null`      |
+      | `renderable` | 是否允许自定义列显示效果                                     | `boolean`  | `false`     |
+      | `hidden`     | 列是否隐藏                                                   | `boolean`  | `false`     |
+      | `editable`   | 列是否允许编辑                                               | `boolean`  | `true`      |
+      | `default`    | 列的默认值，**用于新增**                                     | `function` | `undefined` |
+      | `converter`  | 列的值转换器，**用于新增、更新**                             | `function` | `undefined` |
+      | `exportable` | 列是否允许导出                                               | `boolean`  | `true`      |
+      | `excelValue` | 列的值转换器，**用于导出**                                   | `function` | `undefined` |
+
+* 事件
+
+  * | 名称         | 描述                 | 参数                                                         |
+    | ------------ | -------------------- | ------------------------------------------------------------ |
+    | `load`       | 在加载记录**时**触发 | `{conditions: 过滤条件, sortState: 排序方式, page: 页码, size: 每页条数}` |
+    | after-load   | 在加载记录**后**触发 | `{total: 总数, items: 记录，conditions: 过滤条件, sortState: 排序方式, page: 页码, size: 每页条数}` |
+    | add          | 在新增记录**时**触发 | `{editedItem: 编辑的记录, conditions: 过滤条件, sortState: 排序方式}` |
+    | after-add    | 在新增记录**后**触发 |                                                              |
+    | update       | 在更新记录**时**触发 | `{editedItem: 编辑的记录, conditions: 过滤条件, sortState: 排序方式}` |
+    | after-update | 在更新记录**后**触发 |                                                              |
+    | remove       | 在删除记录**时**触发 | `{id: 记录ID, conditions: 过滤条件, sortState: 排序方式}`    |
+    | after-remove | 在删除记录**后**触发 |                                                              |
+
+* 插槽
+
+  * | 名称                   | 描述                                       | 作用域                                              |
+    | ---------------------- | ------------------------------------------ | --------------------------------------------------- |
+    | `title`                | 表格名称                                   |                                                     |
+    | `more-operations`      | 标题栏除了新增、刷新、导出额外的操作       | `{items: 记录}`                                     |
+    | `top`                  | 表格上方区域                               |                                                     |
+    | `item.${string}`       | 同`VDataTableServer`的插槽`item.${string}` | `{item: 当前记录, value: 值}`                       |
+    | `item.more-operations` | 记录行除了更新、删除额外的操作             | `{item: 当前记录}`                                  |
+    | `filter`               | 过滤表单                                   | `{conditions: 过滤条件}`                            |
+    | `editor`               | 编辑表单                                   | `{editorType: 新增 / 删除, editedItem: 编辑的记录}` |
+
+* 方法
+
+  * | 名称            | 描述         | 参数                                  | 返回值 |
+    | --------------- | ------------ | ------------------------------------- | ------ |
+    | `reload`        | 重新加载记录 |                                       |        |
+    | `onAddClick`    | 打开新增弹窗 | `title: 标题`                         |        |
+    | `onUpdateClick` | 打开编辑弹窗 | `item: 编辑的记录`<br />`title: 标题` |        |
+
+#### （虚拟滚动）增删改查表格（CCrudTableV2）
+
+```
+<CCrudTableV2
+    title="文件资源管理器"
+    :columns="columns"
+    fixed-index
+    load-items-url="/api/file-explorer/files/search"
+    add-item-url="/api/file-explorer/files/save"
+    update-item-url="/api/file-explorer/files/save"
+    remove-item-url="/api/file-explorer/files/delete"
+    show-refresh-btn
+    show-export-btn
+    show-icon-btn
+    row-key="id"
+    row-title="name">
+    ...
+</CCrudTableV2>
+```
+
+[完整的示例参考Table2.vue](./src/demos/Table2.vue)
+
+* 属性
+  * 同`CCrudTable`；
+* 事件
+
+  * 同`CCrudTable`；
+* 插槽
+
+  * 同`CCrudTable`；
+* 方法
+  * 同`CCrudTable`；
+
+
 ### 交互（3）
 
 #### 消息框（CMessage）

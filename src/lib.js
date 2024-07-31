@@ -1,4 +1,8 @@
 // Components
+// Table
+import CCrudTable from '@/components/table/CCrudTable.vue';
+import CCrudTableV2 from '@/components/table/CCrudTableV2.vue';
+
 // Form
 import CPassword from '@/components/form/CPassword.vue';
 import CCaptcha from '@/components/form/CCaptcha.vue';
@@ -54,6 +58,10 @@ import {useTimer} from '@/composables/timer';
 
 export {
     // Components
+    // Table
+    CCrudTable,
+    CCrudTableV2,
+
     // Form
     CPassword,
     CCaptcha,
@@ -109,6 +117,10 @@ export {
 }
 
 const components = [
+    // Table
+    CCrudTable,
+    CCrudTableV2,
+
     // Form
     CPassword,
     CCaptcha,
