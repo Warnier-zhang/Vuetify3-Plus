@@ -2,7 +2,7 @@
     <div>
         <v-breadcrumbs :items="['控件', '（虚拟滚动）增删改查表格']"></v-breadcrumbs>
 
-        <v-list-subheader>CCrudTable:</v-list-subheader>
+        <v-list-subheader>CCrudTableV2:</v-list-subheader>
         <v-row>
             <v-col cols="12">
                 <CCrudTableV2

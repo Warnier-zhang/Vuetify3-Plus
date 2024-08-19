@@ -109,6 +109,7 @@
     | `showRefreshBtn`     | 是否显示刷新按钮                                             | `boolean` | `false`  |
     | `showFilterBtn`      | 是否显示过滤按钮                                             | `boolean` | `true`   |
     | `showExportBtn`      | 是否显示导出按钮                                             | `boolean` | `false`  |
+    | `exportExcel`        | 是否以Excel形式导出                                          | `boolean` | `true`   |
     | `showUpdateBtn`      | 是否显示更新按钮                                             | `boolean` | `true`   |
     | `showDeleteBtn`      | 是否显示删除按钮                                             | `boolean` | `true`   |
     | `loadItemsUrl`       | 加载记录API地址，返回值必须包含`total`、`items`属性，例如：`{total: 10, items: [{...}, ...]}` | `string`  | `null`   |
@@ -125,7 +126,7 @@
     | `disablePagination`  | 是否禁用分页                                                 | `boolean` | `false`  |
     | `widthPadding`       | 多余的宽度，用于计算表格宽度，实现宽度自适应                 | `number`  | `-1`     |
     | `heightPadding`      | 多余的高度，用于计算表格高度，实现高度自适应                 | `number`  | `-1`     |
-
+    
   * 其中，`columns`属性：
 
     * 同`VDataTableServer`的`headers`属性；
@@ -135,9 +136,10 @@
       | `type`       | 列类型，若值为`code`，则是代码类型，代码列的最终显示由`codes`，或`url`加载到代码集确定 | `string`   | `null`      |
       | `codes`      | 代码集                                                       | `array`    | `[]`        |
       | `url`        | 代码集API地址，若`codes`的值不为空，则以`codes`的值为主      | `string`   | `null`      |
+      | `codesRef`   | 与其他代码列共享代码集，值同属性`key`                        | `string`   | `null`      |
       | `codeName`   | 代码名称对应的属性                                           | `string`   | `null`      |
       | `codeValue`  | 代码值对应的属性                                             | `string`   | `null`      |
-      | `renderable` | 是否允许自定义列显示效果                                     | `boolean`  | `false`     |
+      | `renderable` | 是否允许自定义列显示效果，需要配合`item.${string}`插槽一起使用 | `boolean`  | `false`     |
       | `hidden`     | 列是否隐藏                                                   | `boolean`  | `false`     |
       | `editable`   | 列是否允许编辑                                               | `boolean`  | `true`      |
       | `default`    | 列的默认值，**用于新增**                                     | `function` | `undefined` |
@@ -147,16 +149,17 @@
 
 * 事件
 
-  * | 名称         | 描述                 | 参数                                                         |
-    | ------------ | -------------------- | ------------------------------------------------------------ |
-    | `load`       | 在加载记录**时**触发 | `{conditions: 过滤条件, sortState: 排序方式, page: 页码, size: 每页条数}` |
-    | after-load   | 在加载记录**后**触发 | `{total: 总数, items: 记录，conditions: 过滤条件, sortState: 排序方式, page: 页码, size: 每页条数}` |
-    | add          | 在新增记录**时**触发 | `{editedItem: 编辑的记录, conditions: 过滤条件, sortState: 排序方式}` |
-    | after-add    | 在新增记录**后**触发 |                                                              |
-    | update       | 在更新记录**时**触发 | `{editedItem: 编辑的记录, conditions: 过滤条件, sortState: 排序方式}` |
-    | after-update | 在更新记录**后**触发 |                                                              |
-    | remove       | 在删除记录**时**触发 | `{id: 记录ID, conditions: 过滤条件, sortState: 排序方式}`    |
-    | after-remove | 在删除记录**后**触发 |                                                              |
+  * | 名称           | 描述                 | 参数                                                         |
+    | -------------- | -------------------- | ------------------------------------------------------------ |
+    | `load`         | 在加载记录**时**触发 | `{conditions: 过滤条件, sortState: 排序方式, page: 页码, size: 每页条数}` |
+    | `after-load`   | 在加载记录**后**触发 | `{total: 总数, items: 记录，conditions: 过滤条件, sortState: 排序方式, page: 页码, size: 每页条数}` |
+    | `add`          | 在新增记录**时**触发 | `{editedItem: 编辑的记录, conditions: 过滤条件, sortState: 排序方式}` |
+    | `after-add`    | 在新增记录**后**触发 |                                                              |
+    | `update`       | 在更新记录**时**触发 | `{editedItem: 编辑的记录, conditions: 过滤条件, sortState: 排序方式}` |
+    | `after-update` | 在更新记录**后**触发 |                                                              |
+    | `remove`       | 在删除记录**时**触发 | `{id: 记录ID, conditions: 过滤条件, sortState: 排序方式}`    |
+    | `after-remove` | 在删除记录**后**触发 |                                                              |
+    | `export`       | 在导出记录**时**触发 | `{items: 记录，conditions: 过滤条件}`                        |
 
 * 插槽
 
@@ -179,6 +182,8 @@
     | `onUpdateClick` | 打开编辑弹窗 | `item: 编辑的记录`<br />`title: 标题` |        |
 
 #### （虚拟滚动）增删改查表格（CCrudTableV2）
+
+扩展自`VDataTableVirtual`组件，扩展内容同`CCrudTable`。
 
 ```
 <CCrudTableV2

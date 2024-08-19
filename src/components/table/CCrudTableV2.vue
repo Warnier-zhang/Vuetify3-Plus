@@ -127,32 +127,17 @@
                 :width="width"
                 :height="height"
                 fixed-header
+                :key="data.length"
+                :item-height="16"
                 no-data-text="没有数据">
                 <template
                     v-for="column in columns"
                     v-slot:[`item.${column.key}`]="{index, item}">
-                    <CLabel
-                        v-if="column.type === 'code'"
-                        :value="item[column.key]"
-                        :items="codesHolder[column.key]"
-                        :item-title="column.codeName"
-                        :item-value="column.codeValue">
-                        <template
-                            v-if="column.renderable"
-                            v-slot:default="{label}">
-                            <slot
-                                :name="`item.${column.key}`"
-                                :item="item"
-                                :value="label">
-                            </slot>
-                        </template>
-                    </CLabel>
-
                     <slot
-                        v-else-if="column.renderable"
+                        v-if="column.renderable"
                         :name="`item.${column.key}`"
                         :item="item"
-                        :value="item[column.key]">
+                        :value="column.type === 'code'? item[`${column.key}CodeName`]: item[column.key]">
                     </slot>
 
                     <template v-else-if="column.key === 'index'">
@@ -217,7 +202,7 @@
                     </template>
 
                     <template v-else>
-                        {{ item[column.key] }}
+                        {{ column.type === 'code' ? item[`${column.key}CodeName`] : item[column.key] }}
                     </template>
                 </template>
             </v-data-table-virtual>
@@ -307,9 +292,6 @@
 </template>
 
 <script setup>
-// Components
-import CLabel from '@/components/CLabel.vue';
-
 // Vue
 import {inject, useAttrs} from 'vue';
 

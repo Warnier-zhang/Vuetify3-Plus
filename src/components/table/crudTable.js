@@ -51,6 +51,10 @@ export const crudTableProps = {
         type: Boolean,
         default: false
     },
+    exportExcel: {
+        type: Boolean,
+        default: true
+    },
     showUpdateBtn: {
         type: Boolean,
         default: true
@@ -124,7 +128,8 @@ export const crudTableEvents = [
     'update',
     'after-update',
     'remove',
-    'after-remove'
+    'after-remove',
+    'export',
 ];
 
 export function useCrudTable($http, props, attrs, emit) {
@@ -191,6 +196,57 @@ export function useCrudTable($http, props, attrs, emit) {
             deep: true,
         }
     );
+
+    /**
+     * 查询代码
+     */
+    const codesHolder = ref({});
+
+    async function loadAllCodes() {
+        for (let column of toValue(columns).filter((column) => column.type === 'code' && typeof column.codesRef === 'undefined')) {
+            await loadCodes(column.key, column.codes, column.url);
+        }
+    }
+
+    async function loadCodes(key, codes, url) {
+        codesHolder.value[key] = [];
+
+        if (Arrays.isNotEmpty(codes)) {
+            codesHolder.value[key] = codes;
+        } else if (url) {
+            let [error, response] = await AsyncTask($http.post(url));
+            if (error) {
+                CMessage.error(error.message);
+                console.log(error);
+                return;
+            }
+            if (response.errorCode === 1) {
+                codesHolder.value[key] = response.data && response.data.length > 0 ? response.data : [];
+            } else {
+                codesHolder.value[key] = [];
+
+                CMessage.error(response.msg);
+                console.log(response.msg);
+            }
+        }
+
+        for (let column of toValue(columns).filter((column) => column.type === 'code' && column.codesRef === key)) {
+            codesHolder.value[column.key] = codesHolder.value[key];
+        }
+    }
+
+    function getCodeName(column, item) {
+        let codeName = item[column.key];
+        if (codesHolder.value[column.key]) {
+            for (let code of codesHolder.value[column.key]) {
+                if (code[column.codeValue] === item[column.key]) {
+                    codeName = code[column.codeName];
+                    break;
+                }
+            }
+        }
+        return codeName;
+    }
 
     /**
      * 排序
@@ -263,25 +319,25 @@ export function useCrudTable($http, props, attrs, emit) {
     watch(
         data,
         (value) => {
-            // 排序
-            let key, order;
-            if (Arrays.isEmpty(sortBys.value)) {
-                // 默认排序
-                if (props.sortKey && props.sortOrder) {
-                    key = props.sortKey;
-                    order = props.sortOrder;
-                    sortBys.value = [
-                        {key, order},
-                    ];
-                }
-            } else {
+            if (Arrays.isNotEmpty(value)) {
+                // 排序
+                let key, order;
                 if (Arrays.isNotEmpty(sortBys.value)) {
                     key = sortBys.value[0].key;
                     order = sortBys.value[0].order;
+                } else {
+                    // 默认排序
+                    if (props.sortKey && props.sortOrder) {
+                        key = props.sortKey;
+                        order = props.sortOrder;
+                        sortBys.value = [
+                            {key, order},
+                        ];
+                    }
                 }
-            }
-            if (props.sortMode === 'client') {
-                Arrays.sortBy(data.value, key, order);
+                if (props.sortMode === 'client') {
+                    Arrays.sortBy(data.value, key, order);
+                }
             }
         },
         {
@@ -289,96 +345,6 @@ export function useCrudTable($http, props, attrs, emit) {
             deep: true,
         }
     );
-
-    function onRefreshClick() {
-        reload();
-    }
-
-    function reload() {
-        load();
-    }
-
-    /**
-     * 查询代码
-     */
-    const codesHolder = ref({});
-
-    function loadAllCodes() {
-        toValue(columns).forEach((column) => {
-            if (column.type === 'code') {
-                loadCodes(column.key, column.codes, column.url);
-            }
-        });
-    }
-
-    async function loadCodes(key, codes, url) {
-        codesHolder.value[key] = [];
-
-        if (Arrays.isNotEmpty(codes)) {
-            codesHolder.value[key] = codes;
-        } else if (url) {
-            let [error, response] = await AsyncTask($http.post(url));
-            if (error) {
-                CMessage.error(error.message);
-                console.log(error);
-                return;
-            }
-            if (response.errorCode === 1) {
-                codesHolder.value[key] = response.data && response.data.length > 0 ? response.data : [];
-            } else {
-                codesHolder.value[key] = [];
-
-                CMessage.error(response.msg);
-                console.log(response.msg);
-            }
-        }
-    }
-
-    function getCodeNameForColumn(column, value) {
-        let name = value;
-        if (codesHolder.value[column.key]) {
-            for (let item of codesHolder.value[column.key]) {
-                if (item[column.codeValue] === value) {
-                    name = item[column.codeName];
-                    break;
-                }
-            }
-        }
-        return name;
-    }
-
-    /**
-     * 导出
-     */
-    function onExportClick() {
-        exportExcel();
-    }
-
-    function exportExcel() {
-        let headers = toValue(columns).filter((column) => column.exportable !== false && column.hidden !== true);
-        let rows = data.value.map((item) => {
-            let row = {};
-            headers.forEach((header) => {
-                row[header.key] = header.excelValue ?
-                    header.excelValue(item) :
-                    header.type === 'code' ? getCodeNameForColumn(header, item[header.key]) : item[header.key];
-            });
-            return row;
-        });
-        const sheet = XLSX.utils.json_to_sheet(rows);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, sheet, props.title ? props.title : '导出Excel');
-        XLSX.utils.sheet_add_aoa(
-            sheet,
-            [
-                headers.map((header) => {
-                    return header.title;
-                })
-            ],
-            {origin: "A1"}
-        );
-        XLSX.writeFile(workbook, `${props.title ? props.title : '导出Excel'}.xlsx`, {compression: true});
-    }
 
     /**
      * 查询
@@ -392,8 +358,6 @@ export function useCrudTable($http, props, attrs, emit) {
     const size = ref(10);
 
     function load() {
-        loadAllCodes();
-
         // 过滤
         if (showFilter.value) {
             showFilter.value = false;
@@ -429,9 +393,24 @@ export function useCrudTable($http, props, attrs, emit) {
             return;
         }
         if (response.errorCode === 1) {
-            if (response.data && Arrays.isNotEmpty(response.data.items)) {
-                data.value = response.data.items;
-                total.value = response.data.total;
+            if (response.data) {
+                if (typeof response.data.items === 'undefined' && typeof response.data.total === 'undefined') {
+                    if (props.disablePagination && Arrays.isNotEmpty(response.data)) {
+                        data.value = processItems(response.data);
+                        total.value = response.data.length;
+                    } else {
+                        data.value = [];
+                        total.value = 0;
+                    }
+                } else {
+                    if (Arrays.isNotEmpty(response.data.items)) {
+                        data.value = processItems(response.data.items);
+                        total.value = response.data.total;
+                    } else {
+                        data.value = [];
+                        total.value = 0;
+                    }
+                }
             } else {
                 data.value = [];
                 total.value = 0;
@@ -445,6 +424,25 @@ export function useCrudTable($http, props, attrs, emit) {
             total: total.value,
             ...params
         });
+    }
+
+    function processItems(items) {
+        let data = [];
+        for (let item of items) {
+            for (let column of toValue(columns).filter((column) => column.type === 'code')) {
+                item[`${column.key}CodeName`] = getCodeName(column, item);
+            }
+            data.push(item);
+        }
+        return data;
+    }
+
+    function onRefreshClick() {
+        reload();
+    }
+
+    function reload() {
+        load();
     }
 
     /**
@@ -465,8 +463,9 @@ export function useCrudTable($http, props, attrs, emit) {
         }
     }
 
-    onMounted(() => {
+    onMounted(async () => {
         onResize();
+        await loadAllCodes();
         if (props.loadItemsImmediate) {
             load();
         }
@@ -547,6 +546,7 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (response.errorCode === 1) {
             CMessage.success(response.msg);
+            await loadAllCodes();
             load();
         } else {
             CMessage.error(response.msg);
@@ -565,6 +565,7 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (response.errorCode === 1) {
             CMessage.success(response.msg);
+            await loadAllCodes();
             load();
         } else {
             CMessage.error(response.msg);
@@ -625,12 +626,53 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (response.errorCode === 1) {
             CMessage.success(response.msg);
+            await loadAllCodes();
             load();
         } else {
             CMessage.error(response.msg);
             console.log(response.msg);
         }
         emit('after-remove');
+    }
+
+    /**
+     * 导出
+     */
+    function onExportClick() {
+        if (props.exportExcel) {
+            exportExcel();
+        } else {
+            emit('export', {
+                conditions: cloneDeep(conditions.value),
+                items: data.value,
+            });
+        }
+    }
+
+    function exportExcel() {
+        let headers = toValue(columns).filter((column) => column.exportable !== false);
+        let rows = data.value.map((item) => {
+            let row = {};
+            headers.forEach((header) => {
+                row[header.key] = header.excelValue ?
+                    header.excelValue(item) :
+                    header.type === 'code' ? item[`${header.key}CodeName`] : item[header.key];
+            });
+            return row;
+        });
+        const sheet = XLSX.utils.json_to_sheet(rows);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, sheet, props.title ? props.title : '导出Excel');
+        XLSX.utils.sheet_add_aoa(
+            sheet,
+            [
+                headers.map((header) => {
+                    return header.title;
+                })
+            ],
+            {origin: "A1"}
+        );
+        XLSX.writeFile(workbook, `${props.title ? props.title : '导出Excel'}.xlsx`, {compression: true});
     }
 
     return {
