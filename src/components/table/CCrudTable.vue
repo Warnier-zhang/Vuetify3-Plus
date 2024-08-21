@@ -152,7 +152,7 @@
                     </slot>
 
                     <template v-else-if="column.key === 'index'">
-                        {{ index + 1 }}
+                        {{ (page - 1) * size + index + 1 }}
                     </template>
 
                     <template v-else-if="column.key === 'operation'">
@@ -222,6 +222,22 @@
                     v-slot:bottom>
                 </template>
             </v-data-table-server>
+
+            <slot
+                name="bottom"
+                :total="total"
+                :items="data"
+                :page="page"
+                :size="size">
+                <div class="border-t-sm py-2 px-1 text-end align-center">
+                    <div class="my-2">
+                        总数：
+                        <span class="border-sm rounded text-body-1 py-2 px-4">
+                            {{ total }}
+                        </span>
+                    </div>
+                </div>
+            </slot>
         </v-card-text>
     </v-card>
 

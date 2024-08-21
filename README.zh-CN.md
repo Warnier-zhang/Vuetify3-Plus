@@ -163,15 +163,16 @@
 
 * 插槽
 
-  * | 名称                   | 描述                                       | 作用域                                              |
-    | ---------------------- | ------------------------------------------ | --------------------------------------------------- |
-    | `title`                | 表格名称                                   |                                                     |
-    | `more-operations`      | 标题栏除了新增、刷新、导出额外的操作       | `{items: 记录}`                                     |
-    | `top`                  | 表格上方区域                               |                                                     |
-    | `item.${string}`       | 同`VDataTableServer`的插槽`item.${string}` | `{item: 当前记录, value: 值}`                       |
-    | `item.more-operations` | 记录行除了更新、删除额外的操作             | `{item: 当前记录}`                                  |
-    | `filter`               | 过滤表单                                   | `{conditions: 过滤条件}`                            |
-    | `editor`               | 编辑表单                                   | `{editorType: 新增 / 删除, editedItem: 编辑的记录}` |
+  * | 名称                   | 描述                                       | 作用域                                                       |
+    | ---------------------- | ------------------------------------------ | ------------------------------------------------------------ |
+    | `title`                | 表格名称                                   |                                                              |
+    | `more-operations`      | 标题栏除了新增、刷新、导出额外的操作       | `{items: 记录}`                                              |
+    | `top`                  | 表格上方区域                               |                                                              |
+    | `item.${string}`       | 同`VDataTableServer`的插槽`item.${string}` | `{item: 当前记录, value: 值}`                                |
+    | `item.more-operations` | 记录行除了更新、删除额外的操作             | `{item: 当前记录}`                                           |
+    | `filter`               | 过滤表单                                   | `{conditions: 过滤条件}`                                     |
+    | `editor`               | 编辑表单                                   | `{editorType: add（新增） / update（更新）, editedItem: 编辑的记录}` |
+    | `bottom`               | 表格下方区域                               | `{total: 总数, items: 记录, page: 页数, size: 每页数目}`     |
 
 * 方法
 

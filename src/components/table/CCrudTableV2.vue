@@ -206,6 +206,21 @@
                     </template>
                 </template>
             </v-data-table-virtual>
+
+            <slot
+                v-if="disablePagination"
+                name="bottom"
+                :total="data.length"
+                :items="data">
+                <div class="border-t-sm py-2 px-1 text-end align-center">
+                    <div class="my-2">
+                        总数：
+                        <span class="border-sm rounded text-body-1 py-2 px-4">
+                            {{ data.length }}
+                        </span>
+                    </div>
+                </div>
+            </slot>
         </v-card-text>
     </v-card>
 

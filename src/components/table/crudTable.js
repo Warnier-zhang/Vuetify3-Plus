@@ -457,7 +457,9 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (props.heightPadding > 0) {
             height.value = window.innerHeight - props.heightPadding - 64 - 1;
-            if (!props.disablePagination) {
+            if (props.disablePagination) {
+                height.value -= 57;
+            } else {
                 height.value -= 62;
             }
         }
