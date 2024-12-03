@@ -1,21 +1,20 @@
 <template>
     <v-btn
-        class="pl-0"
-        color="primary"
+        :color="color"
         :href="href"
         target="_blank"
         rel="noopener noreferrer"
-        variant="text"
-        :disabled="disabled"
-        :ripple="false">
-        {{ text }}
-
-        <v-tooltip
-            v-if="hint"
-            activator="parent"
-            location="top">
-            {{ hint }}
-        </v-tooltip>
+        :text="text"
+        :icon="icon"
+        :variant="icon ? 'tonal' : 'text'"
+        :size="icon ? 'x-small': 'default'"
+        :ripple="icon ? true : false"
+        v-tooltip="{
+            text: hint ? hint : '',
+            disabled: !hint,
+            location: 'top',
+        }"
+        :disabled="disabled">
     </v-btn>
 </template>
 
@@ -25,15 +24,23 @@ defineOptions({
 });
 
 const props = defineProps({
+    href: {
+        type: String,
+        default: null
+    },
     text: {
         type: String,
         default: null
     },
-    hint: {
+    icon: {
         type: String,
         default: null
     },
-    href: {
+    color: {
+        type: String,
+        default: 'primary'
+    },
+    hint: {
         type: String,
         default: null
     },

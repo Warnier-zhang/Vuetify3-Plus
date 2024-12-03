@@ -15,7 +15,7 @@ defineOptions({
     inheritAttrs: false,
 });
 
-const emit = defineEmits(['update:title']);
+const emit = defineEmits(['update:title', 'update:selected']);
 
 const props = defineProps({
     modelValue: {
@@ -65,14 +65,16 @@ watch(
         () => props.modelValue,
     ],
     ([items, value]) => {
-        let title = null;
-        if (isNotEmpty(items) && value) {
-            let item = items.find((item) => item[props.itemValue] === value);
-            if (item) {
-                title = item[props.itemTitle];
-            }
+        let selected = [];
+        let titles = [];
+
+        let values = attrs.multiple === '' ? value : [value];
+        if (isNotEmpty(items) && isNotEmpty(values)) {
+            selected = items.filter((item) => values.includes(item[props.itemValue]));
+            titles = selected.map((item) => item[props.itemTitle]);
         }
-        emit('update:title', title);
+        emit('update:selected', attrs.multiple === '' ? selected : selected[0]);
+        emit('update:title', titles.join(','));
     },
     {
         immediate: true,

@@ -102,6 +102,7 @@
                 <CSelect
                     v-model="productId2"
                     v-model:title="productTitle2"
+                    v-model:selected="selectedProducts2"
                     label="商品"
                     url="/demos/products2.json"
                     variant="outlined"
@@ -110,7 +111,8 @@
                 </CSelect>
 
                 value: {{ productId2 }}<br/>
-                title: {{ productTitle2 }}
+                title: {{ productTitle2 }}<br/>
+                selected: {{ JSON.stringify(selectedProducts2) }}
             </v-col>
 
             <v-col cols="2">
@@ -119,6 +121,7 @@
                 <CAutocomplete
                     v-model="productId2"
                     v-model:title="productTitle2"
+                    v-model:selected="selectedProducts2"
                     label="商品"
                     url="/demos/products2.json"
                     variant="outlined"
@@ -127,7 +130,8 @@
                 </CAutocomplete>
 
                 value: {{ productId2 }}<br/>
-                title: {{ productTitle2 }}
+                title: {{ productTitle2 }}<br/>
+                selected: {{ JSON.stringify(selectedProducts2) }}
             </v-col>
         </v-row>
 
@@ -175,6 +179,7 @@ const time = ref(null);
 const productId = ref(null);
 const productId2 = ref(null);
 const productTitle2 = ref(null);
+const selectedProducts2 = ref([]);
 
 const email = ref(null);
 const password = ref(null);

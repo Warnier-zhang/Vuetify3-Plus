@@ -138,7 +138,7 @@ const upload = ref(null);
 watch(
     upload,
     (value) => {
-        if (value && value.length > 0) {
+        if (value) {
             uploadFile();
         }
     },
@@ -148,12 +148,8 @@ watch(
 );
 
 function uploadFile() {
-    if (!upload.value || upload.value.length === 0) {
-        return;
-    }
-
     let formData = new window.FormData();
-    formData.append("upload", upload.value[0]);
+    formData.append("upload", upload.value);
     $http.post(props.uploadFileUrl, formData, {
         headers: {
             "Content-Type": "multipart/form-data"

@@ -95,37 +95,41 @@
 
 * 属性
 
-  * | 名称                 | 描述                                                         | 类型      | 默认值   |
-    | -------------------- | ------------------------------------------------------------ | --------- | -------- |
-    | `title`              | 标题                                                         | `string`  | `null`   |
-    | `columns`            | 表头列，同`VDataTableServer`的`headers`属性                  | `array`   | `[]`     |
-    | `total`              | 数据集总数，同`VDataTableServer`的`items-length`属性         | `array`   | `0`      |
-    | `data`               | 数据集记录，同`VDataTableServer`的`items`属性                | `array`   | `[]`     |
-    | `showIndex`          | 是否显示序号列                                               | `boolean` | `true`   |
-    | `fixedIndex`         | 是否固定序号列                                               | `boolean` | `false`  |
-    | `showOperation`      | 是否显示操作列                                               | `boolean` | `true`   |
-    | `showIconBtn`        | 是否显示图标按钮                                             | `boolean` | `false`  |
-    | `showAddBtn`         | 是否显示新增按钮                                             | `boolean` | `true`   |
-    | `showRefreshBtn`     | 是否显示刷新按钮                                             | `boolean` | `false`  |
-    | `showFilterBtn`      | 是否显示过滤按钮                                             | `boolean` | `true`   |
-    | `showExportBtn`      | 是否显示导出按钮                                             | `boolean` | `false`  |
-    | `exportExcel`        | 是否以Excel形式导出                                          | `boolean` | `true`   |
-    | `showUpdateBtn`      | 是否显示更新按钮                                             | `boolean` | `true`   |
-    | `showDeleteBtn`      | 是否显示删除按钮                                             | `boolean` | `true`   |
-    | `loadItemsUrl`       | 加载记录API地址，返回值必须包含`total`、`items`属性，例如：`{total: 10, items: [{...}, ...]}` | `string`  | `null`   |
-    | `loadItemsImmediate` | 是否立即加载                                                 | `boolean` | `true`   |
-    | `filterCondition`    | 默认的过滤条件                                               | `object`  | `{}`     |
-    | `addItemUrl`         | 新增记录API地址                                              | `string`  | `null`   |
-    | `updateItemUrl`      | 更新记录API地址                                              | `string`  | `null`   |
-    | `removeItemUrl`      | 删除记录API地址                                              | `string`  | `null`   |
-    | `rowKey`             | 记录ID对应的属性                                             | `string`  | `null`   |
-    | `rowTitle`           | 记录名称对应的属性                                           | `string`  | `null`   |
-    | `sortMode`           | 排序模式，可选值有`client`、`server`，支持客户端、服务端排序 | `string`  | `server` |
-    | `sortKey`            | 默认的排序属性                                               | `string`  | `null`   |
-    | `sortOrder`          | 默认的排序顺序                                               | `string`  | `null`   |
-    | `disablePagination`  | 是否禁用分页                                                 | `boolean` | `false`  |
-    | `widthPadding`       | 多余的宽度，用于计算表格宽度，实现宽度自适应                 | `number`  | `-1`     |
-    | `heightPadding`      | 多余的高度，用于计算表格高度，实现高度自适应                 | `number`  | `-1`     |
+  * | 名称                 | 描述                                                         | 类型             | 默认值   |
+    | -------------------- | ------------------------------------------------------------ | ---------------- | -------- |
+    | `title`              | 标题                                                         | `string`         | `null`   |
+    | `columns`            | 表头列，同`VDataTableServer`的`headers`属性                  | `array`          | `[]`     |
+    | `total`              | 数据集总数，同`VDataTableServer`的`items-length`属性         | `array`          | `0`      |
+    | `data`               | 数据集记录，同`VDataTableServer`的`items`属性                | `array`          | `[]`     |
+    | `showIndex`          | 是否显示序号列                                               | `boolean`        | `true`   |
+    | `fixedIndex`         | 是否固定序号列                                               | `boolean`        | `false`  |
+    | `showOperation`      | 是否显示操作列                                               | `boolean`        | `true`   |
+    | `showIconBtn`        | 是否显示图标按钮                                             | `boolean`        | `false`  |
+    | `showAddBtn`         | 是否显示新增按钮                                             | `boolean`        | `true`   |
+    | `showRefreshBtn`     | 是否显示刷新按钮                                             | `boolean`        | `false`  |
+    | `showFilterBtn`      | 是否显示过滤按钮                                             | `boolean`        | `true`   |
+    | `showExportBtn`      | 是否显示导出按钮                                             | `boolean`        | `false`  |
+    | `exportType`         | 导出类型，可选值有`excel`、`image`等                         | `string`         | `excel`  |
+    | `showUpdateBtn`      | 是否显示更新按钮                                             | `boolean`        | `true`   |
+    | `showDeleteBtn`      | 是否显示删除按钮                                             | `boolean`        | `true`   |
+    | `loadItemsUrl`       | 加载记录API地址，返回值必须包含`total`、`items`属性，例如：`{total: 10, items: [{...}, ...]}` | `string`         | `null`   |
+    | `loadItemsImmediate` | 是否立即加载                                                 | `boolean`        | `true`   |
+    | `filterCondition`    | 默认的过滤条件                                               | `object`         | `{}`     |
+    | `addItemUrl`         | 新增记录API地址                                              | `string`         | `null`   |
+    | `updateItemUrl`      | 更新记录API地址                                              | `string`         | `null`   |
+    | `removeItemUrl`      | 删除记录API地址                                              | `string`         | `null`   |
+    | `removeItemTip`      | 删除记录提示                                                 | `function`       | `null`   |
+    | `rowKey`             | 记录ID对应的属性                                             | `string`         | `null`   |
+    | `rowTitle`           | 记录名称对应的属性                                           | `string`         | `null`   |
+    | `sortMode`           | 排序模式，可选值有`client`、`server`，支持客户端、服务端排序 | `string`         | `server` |
+    | `sortKey`            | 默认的排序属性                                               | `string`         | `null`   |
+    | `sortOrder`          | 默认的排序顺序                                               | `string`         | `null`   |
+    | `disablePagination`  | 是否禁用分页                                                 | `boolean`        | `false`  |
+    | `pages`              | 页数，**适用于CCrudTable**                                   | `string、number` | `null`   |
+    | `pageSize`           | 每页记录数，**适用于CCrudTable**                             | `string、number` | `10`     |
+    | `widthPadding`       | 多余的宽度，用于计算表格宽度，实现宽度自适应                 | `number`         | `-1`     |
+    | `heightPadding`      | 多余的高度，用于计算表格高度，实现高度自适应                 | `number`         | `-1`     |
+    | `editorWidth`        | 编辑记录弹窗宽度                                             | `number`         | `600`    |
     
   * 其中，`columns`属性：
 
@@ -133,17 +137,19 @@
 
     * | 名称         | 描述                                                         | 类型       | 默认值      |
       | ------------ | ------------------------------------------------------------ | ---------- | ----------- |
-      | `type`       | 列类型，若值为`code`，则是代码类型，代码列的最终显示由`codes`，或`url`加载到代码集确定 | `string`   | `null`      |
+      | `type`       | 列类型，配合`format`属性一起使用，可以对列的原始值进行转换、格式化。`type`的可选值有<br />（1）`code`：代码，代码列的最终显示由`codesRef`、`codes`，或`url`加载到代码集确定<br />（2）`index`：序号（组件内置）<br />（3）`operation`：操作（组件内置）<br />（4）`number`：数字，可以是整数，也可以是小数<br />（5）`integer`：整数<br />（6）`decimal`：小数<br />（7）`percent`：百分比<br />（8）`currency`：货币<br />（9）`datetime`：日期时间<br />（10）`longtext`：长文本 | `string`   | `null`      |
+      | `format`     | 列类型格式化参数，具体内容参考组合式函数[useFormat](./src/composables/format.js) | `any`      | `null`      |
       | `codes`      | 代码集                                                       | `array`    | `[]`        |
       | `url`        | 代码集API地址，若`codes`的值不为空，则以`codes`的值为主      | `string`   | `null`      |
       | `codesRef`   | 与其他代码列共享代码集，值同属性`key`                        | `string`   | `null`      |
       | `codeName`   | 代码名称对应的属性                                           | `string`   | `null`      |
       | `codeValue`  | 代码值对应的属性                                             | `string`   | `null`      |
+      | `children`   | 子表头                                                       | `array`    | `[]`        |
       | `renderable` | 是否允许自定义列显示效果，需要配合`item.${string}`插槽一起使用 | `boolean`  | `false`     |
       | `hidden`     | 列是否隐藏                                                   | `boolean`  | `false`     |
       | `editable`   | 列是否允许编辑                                               | `boolean`  | `true`      |
-      | `default`    | 列的默认值，**用于新增**                                     | `function` | `undefined` |
-      | `converter`  | 列的值转换器，**用于新增、更新**                             | `function` | `undefined` |
+      | `default`    | 列的默认值，支持**异步**，**用于新增**                       | `function` | `undefined` |
+      | `converter`  | 列的值转换器，支持**异步**，**用于新增、更新**               | `function` | `undefined` |
       | `exportable` | 列是否允许导出                                               | `boolean`  | `true`      |
       | `excelValue` | 列的值转换器，**用于导出**                                   | `function` | `undefined` |
 
@@ -168,7 +174,7 @@
     | `title`                | 表格名称                                   |                                                              |
     | `more-operations`      | 标题栏除了新增、刷新、导出额外的操作       | `{items: 记录}`                                              |
     | `top`                  | 表格上方区域                               |                                                              |
-    | `item.${string}`       | 同`VDataTableServer`的插槽`item.${string}` | `{item: 当前记录, value: 值}`                                |
+    | `item.${string}`       | 同`VDataTableServer`的插槽`item.${string}` | `{items: 所有记录, index: 索引, item: 当前记录, raw-value: 原始值, value: 格式化后的值}` |
     | `item.more-operations` | 记录行除了更新、删除额外的操作             | `{item: 当前记录}`                                           |
     | `filter`               | 过滤表单                                   | `{conditions: 过滤条件}`                                     |
     | `editor`               | 编辑表单                                   | `{editorType: add（新增） / update（更新）, editedItem: 编辑的记录}` |
@@ -176,11 +182,13 @@
 
 * 方法
 
-  * | 名称            | 描述         | 参数                                  | 返回值 |
-    | --------------- | ------------ | ------------------------------------- | ------ |
-    | `reload`        | 重新加载记录 |                                       |        |
-    | `onAddClick`    | 打开新增弹窗 | `title: 标题`                         |        |
-    | `onUpdateClick` | 打开编辑弹窗 | `item: 编辑的记录`<br />`title: 标题` |        |
+  * | 名称              | 描述                 | 参数                                  | 返回值               |
+    | ----------------- | -------------------- | ------------------------------------- | -------------------- |
+    | `reload`          | 重新加载记录         |                                       |                      |
+    | `loadByCondition` | 根据过滤条件加载记录 | `additions：附加条件`                 |                      |
+    | `onAddClick`      | 打开新增弹窗         | `title: 标题`                         |                      |
+    | `onUpdateClick`   | 打开编辑弹窗         | `item: 编辑的记录`<br />`title: 标题` |                      |
+    | `saveAsImage`     | 把表格内容另存为图片 |                                       | Base64编码格式的图片 |
 
 #### （虚拟滚动）增删改查表格（CCrudTableV2）
 
@@ -569,12 +577,13 @@ CLoading.close();
 
 #### 下拉选择（CSelect）
 
-> 选择类的组件，如VSelect、VAutocomplete等，鉴于它们的属性、数据结构类似，并且，对它们有部分相同的扩展需求——比如通过URL加载数据，返回选中项的名称等，因此，创建了一个无渲染组件——BaseSelect来达到上述目的。
+> 选择类的组件，如VSelect、VAutocomplete等，鉴于它们的属性、数据结构类似，并且，对它们有部分相同的扩展需求——比如通过URL加载数据，返回选中项及名称等，因此，创建了一个无渲染组件——BaseSelect来达到上述目的。
 
 ```
 <CSelect
     v-model="productId2"
     v-model:title="productTitle2"
+    v-model:selected="selectedProducts2"
     label="商品"
     url="/demos/products2.json"
     variant="outlined"
@@ -597,6 +606,11 @@ CLoading.close();
 * 事件
 
     * 同`VSelect`；
+
+    * | 名称              | 描述         | 参数         |
+      | ----------------- | ------------ | ------------ |
+      | `update:selected` | 在选中时触发 | 选中项       |
+      | `update:title`    | 在选中时触发 | 选中项的名称 |
 
 * 插槽
 
@@ -761,8 +775,9 @@ CLoading.close();
     | `nameTitle`     | 点名称的标题，**适用于气泡图**                               | `string`           | `''`        |
     | `itemX`         | X轴对应的属性                                                | `string`           | `x`         |
     | `itemY`         | Y轴对应的属性                                                | `string`           | `y`         |
-    | `itemZ`         | Z轴对应的属性，配合`pointSize`属性，用于确定气泡大小，**适用于气泡图** | `string`           | `null`      |
-    | `pointSize`     | 气泡大小                                                     | `number`           | `10`        |
+    | `itemZ`         | Z轴对应的属性，配合`minPointSize`和`maxPointSize`属性规定的气泡大小尺寸范围，自动确定气泡大小，**适用于气泡图** | `string`           | `null`      |
+    | `maxPointSize`  | 气泡最大的尺寸，**适用于气泡图**                             | `number`           | `100`       |
+    | `minPointSize`  | 气泡最小的尺寸，**适用于气泡图**                             | `number`           | `10`        |
     | `aspectRatio`   | 宽高比                                                       | `string`、`number` | `auto`      |
     | `multiple`      | 是否支持多个序列                                             | `boolean`          | `false`     |
     | `showPoint`     | 是否显示点                                                   | `boolean`          | `true`      |
@@ -771,7 +786,6 @@ CLoading.close();
     | `smooth`        | 是否显示平滑曲线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
     | `steped`        | 是否显示梯形折线，**适用于折线图、面积图**                   | `boolean`          | `false`     |
     | `stacked`       | 是否折叠，**适用于柱形图**                                   | `boolean`          | `false`     |
-    | `exponent`      | 数量级，**适用于气泡图**。气泡图中气泡的大小由`itemY`的值决定，`10^exponent`用于缩放 | `string`、`number` | `1`         |
 
 * 事件
 
@@ -882,7 +896,6 @@ CLoading.close();
     x-axis-title="浏览器"
     y-axis-title="市占率"
     y-axis-unit="%"
-    :exponent="0.1"
     :aspect-ratio="1">
 </CBubbleChart>
 
@@ -893,7 +906,6 @@ CLoading.close();
     x-axis-title="浏览器"
     y-axis-title="市占率"
     y-axis-unit="%"
-    :exponent="0.1"
     show-legend
     multiple
     :aspect-ratio="1">
@@ -1052,7 +1064,9 @@ CLoading.close();
 
   * 无；
 
-### 统计（7）
+### 统计（9）
+
+> 根据标题、副标题、文本等布局的不同，把统计类组件分成2类，并创建了2个父类组件——BaseStat1、BaseStat2来简化设计、开发。
 
 #### v1（CStat1）
 
@@ -1102,7 +1116,9 @@ CLoading.close();
     subtitle="Sales"
     icon="mdi-trending-up"
     color="red"
-    text="Calculated in last 7 days">
+    text="Calculated in last 7 days"
+    :chip="false"
+    chip-text="+15%">
 </CStat2>
 ```
 
@@ -1112,13 +1128,15 @@ CLoading.close();
 
 * 属性
 
-  * | 名称       | 描述         | 类型     | 默认值 |
-    | ---------- | ------------ | -------- | ------ |
-    | `title`    | 标题         | `string` | `null` |
-    | `subtitle` | 副标题       | `string` | `null` |
-    | `text`     | 文本         | `string` | `null` |
-    | `icon`     | 图标         | `string` | `null` |
-    | `color`    | 颜色（图标） | `string` | `null` |
+  * | 名称        | 描述               | 类型      | 默认值  |
+    | ----------- | ------------------ | --------- | ------- |
+    | `title`     | 标题               | `string`  | `null`  |
+    | `subtitle`  | 副标题             | `string`  | `null`  |
+    | `text`      | 文本               | `string`  | `null`  |
+    | `icon`      | 图标               | `string`  | `null`  |
+    | `color`     | 颜色（图标）       | `string`  | `null`  |
+    | `chip`      | 是否以纸片形式显示 | `boolean` | `false` |
+    | `chip-text` | 纸片内容           | `string`  | `null`  |
 
 * 事件
 
@@ -1184,7 +1202,7 @@ CLoading.close();
     title="245k"
     subtitle="Sales"
     text="Calculated in last 7 days"
-    emphasis="+15%"
+    hint="+15%"
     color="red">
 </CStat4>
 ```
@@ -1200,7 +1218,7 @@ CLoading.close();
     | `title`    | 标题               | `string` | `null` |
     | `subtitle` | 副标题             | `string` | `null` |
     | `text`     | 文本               | `string` | `null` |
-    | `emphasis` | 强调               | `string` | `null` |
+    | `hint`     | 提示               | `string` | `null` |
     | `color`    | 颜色（标记、强调） | `string` | `null` |
 
 * 事件
@@ -1342,6 +1360,94 @@ CLoading.close();
 
   * 无；
 
+#### v8（CStat8）
+
+```
+<CStat8
+    title="245k"
+    subtitle="Sales"
+    color="red"
+    type="trend"
+    :items="[4, 2, 5, 7, 1, 6, 3]">
+</CStat8>
+
+<CStat8
+    title="245k"
+    subtitle="Sales"
+    color="red"
+    type="bar"
+    :items="[4, 2, 5, 6, 17, 1, 3]">
+</CStat8>
+```
+
+效果图：
+
+![CStat8](./images/c-stat8.png)
+
+* 属性
+
+  * | 名称       | 描述                                  | 类型     | 默认值  |
+    | ---------- | ------------------------------------- | -------- | ------- |
+    | `title`    | 标题                                  | `string` | `null`  |
+    | `subtitle` | 副标题                                | `string` | `null`  |
+    | `text`     | 文本                                  | `string` | `null`  |
+    | `icon`     | 图标                                  | `string` | `null`  |
+    | `color`    | 颜色                                  | `string` | `null`  |
+    | `type`     | Sparkline类型，可选值有`trend`、`bar` | `string` | `trend` |
+    | `items`    | Sparkline数据                         | `array`  | `[]`    |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 暂无；
+
+* 方法
+
+  * 无；
+
+#### v9（CStat9）
+
+```
+<CStat9
+    title="245k"
+    subtitle="Sales"
+    color="red"
+    expected="999"
+    actual="245">
+</CStat9>
+```
+
+效果图：
+
+![CStat9](./images/c-stat9.png)
+
+* 属性
+
+  * | 名称       | 描述   | 类型             | 默认值 |
+    | ---------- | ------ | ---------------- | ------ |
+    | `title`    | 标题   | `string`         | `null` |
+    | `subtitle` | 副标题 | `string`         | `null` |
+    | `text`     | 文本   | `string`         | `null` |
+    | `icon`     | 图标   | `string`         | `null` |
+    | `color`    | 颜色   | `string`         | `null` |
+    | `actual`   | 实际值 | `string、number` | `null` |
+    | `expected` | 预估值 | `string、number` | `null` |
+
+* 事件
+
+  * 无；
+
+* 插槽
+
+  * 暂无；
+
+* 方法
+
+  * 无；
+
 ### 其他（5）
 
 #### 图片（CImg）
@@ -1380,12 +1486,14 @@ CLoading.close();
 
 * 属性
 
-  * | 名称       | 描述     | 类型      | 默认值  |
-    | ---------- | -------- | --------- | ------- |
-    | `text`     | 名称     | `string`  | `null`  |
-    | `href`     | 链接     | `string`  | `null`  |
-    | `disabled` | 是否禁用 | `boolean` | `false` |
-    | `hint`     | 提示     | `string`  | `null`  |
+  * | 名称       | 描述                             | 类型      | 默认值    |
+    | ---------- | -------------------------------- | --------- | --------- |
+    | `text`     | 名称                             | `string`  | `null`    |
+    | `href`     | 链接                             | `string`  | `null`    |
+    | `disabled` | 是否禁用                         | `boolean` | `false`   |
+    | `hint`     | 提示                             | `string`  | `null`    |
+    | `icon`     | 图标，若不为空，则以图标形式显示 | `string`  | `null`    |
+    | `color`    | 颜色                             | `string`  | `primary` |
   
 * 事件
 

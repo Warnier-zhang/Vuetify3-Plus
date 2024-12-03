@@ -117,6 +117,7 @@
             <slot name="top"></slot>
 
             <v-data-table-server
+                :ref="(el) => setRefs('dataTable', el)"
                 class="text-no-wrap"
                 :headers="columns.filter((column) => !column.hidden)"
                 :items-length="total"
@@ -142,20 +143,23 @@
                 fixed-header
                 no-data-text="没有数据">
                 <template
-                    v-for="column in columns"
+                    v-for="column in columns.map((column) => column.children ? column.children : column).flat()"
                     v-slot:[`item.${column.key}`]="{index, item}">
                     <slot
                         v-if="column.renderable"
                         :name="`item.${column.key}`"
+                        :items="data"
+                        :index="index"
                         :item="item"
-                        :value="column.type === 'code'? item[`${column.key}CodeName`]: item[column.key]">
+                        :raw-value="item[column.key]"
+                        :value="formatValue(column, item)">
                     </slot>
 
-                    <template v-else-if="column.key === 'index'">
+                    <template v-else-if="column.type === 'index'">
                         {{ (page - 1) * size + index + 1 }}
                     </template>
 
-                    <template v-else-if="column.key === 'operation'">
+                    <template v-else-if="column.type === 'operation'">
                         <template v-if="showUpdateBtn">
                             <v-btn
                                 v-if="showIconBtn"
@@ -213,17 +217,37 @@
                     </template>
 
                     <template v-else>
-                        {{ column.type === 'code' ? item[`${column.key}CodeName`] : item[column.key] }}
+                        <div
+                            v-if="column.type === 'longtext'"
+                            class="text-truncate"
+                            style="max-width: 200px;"
+                            v-html="formatValue(column, item)"
+                            :title="item[column.key]">
+                        </div>
+
+                        <div v-else>
+                            {{ formatValue(column, item) }}
+                        </div>
                     </template>
                 </template>
 
                 <template
                     v-if="disablePagination"
                     v-slot:bottom>
+                    <v-pagination
+                        v-if="pages"
+                        v-model="page"
+                        @update:modelValue="load"
+                        :total-visible="5"
+                        :length="pages"
+                        rounded="circle"
+                        density="comfortable">
+                    </v-pagination>
                 </template>
             </v-data-table-server>
 
             <slot
+                v-if="disablePagination"
                 name="bottom"
                 :total="total"
                 :items="data"
@@ -285,7 +309,7 @@
         v-model="showEditor"
         persistent
         no-click-animation
-        width="600"
+        :width="editorWidth"
         z-index="1800">
         <v-card>
             <v-card-title>
@@ -341,6 +365,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+        pages: {
+        type: [String, Number],
+        default: null,
+    },
 });
 
 const attrs = useAttrs();
@@ -360,10 +388,12 @@ const {
     columns,
     total,
     data,
+    formatValue,
     sortBys,
     onColumnSort,
     codesHolder,
     reload,
+    loadByCondition,
     page,
     size,
     load,
@@ -376,7 +406,8 @@ const {
     editorType,
     editedItem,
     closeEditor,
-    save
+    save,
+    saveAsImage
 } = useCrudTable(
     $http,
     props,
@@ -387,8 +418,10 @@ const {
 // Expose methods of Child Components
 defineExpose({
     reload,
+    loadByCondition,
     onAddClick,
     onUpdateClick,
+    saveAsImage,
 });
 </script>
 

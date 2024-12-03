@@ -7,6 +7,9 @@ import {useLang} from '@/composables/lang';
 // Vue
 import {ref, watch} from "vue";
 
+// Utilities
+import cloneDeep from 'lodash/cloneDeep';
+
 export const coordProps = {
     title: {
         type: String,
@@ -114,13 +117,13 @@ export const coordProps = {
         type: String,
         default: null
     },
-    pointSize: {
+    maxPointSize: {
+        type: Number,
+        default: 100
+    },
+    minPointSize: {
         type: Number,
         default: 10
-    },
-    exponent: {
-        type: [String, Number],
-        default: 1
     },
     lines: {
         type: Array,
@@ -167,23 +170,22 @@ export function useCoord($http, type, props) {
             max: props.yAxisMax,
         },
         tooltip: {
-            trigger: !props.showPoint || props.multiple ? 'axis' : 'item',
+            trigger: 'axis',
             formatter(params) {
                 let tooltip = '';
-                if (chartOptions.value.tooltip.trigger === 'item') {
-                    if (params.componentType === 'series') {
-                        tooltip = `<span class="text-caption">${props.xAxisTitle}：</span><span class="font-weight-bold">${params.value[props.itemX]}</span><br/><span class="text-caption">${props.yAxisTitle}：</span><span class="font-weight-bold">${params.value[props.itemY]}${props.yAxisUnit}</span>`;
-                        if (type === 'bubble') {
-                            tooltip = `<span class="text-caption">${props.nameTitle}：</span><span class="font-weight-bold">${params.value[props.itemName]}</span><br/>` + tooltip;
-                        }
-                    } else if (params.componentType === 'markLine') {
-                        tooltip = `<span class="text-caption">${params.name}：</span><span class="font-weight-bold">${params.value}</span>`;
-                    }
-                } else if (chartOptions.value.tooltip.trigger === 'axis') {
-                    let x = params[0].value[props.itemX];
-                    tooltip += `<span class="text-subtitle-2">${x}</span><br/>`;
+                if (props.multiple) {
+                    tooltip = `<span class="text-subtitle-2">${params[0].value[props.itemX]}</span><br/>`;
                     for (let param of params) {
-                        tooltip += `<span class="text-caption" style="color: ${param.color};">${param.value[props.itemSerieName]}：</span><span class="font-weight-bold">${param.value[props.itemY]}${props.yAxisUnit}</span><br/>`;
+                        tooltip += `<span class="text-caption" style="color: ${param.color};">● ${param.value[props.itemSerieName]}：</span><span class="font-weight-bold">${param.value[props.itemY]}${props.yAxisUnit}</span><br/>`;
+                    }
+                } else {
+                    if (type === 'bubble') {
+                        tooltip = `<span class="text-subtitle-2">${params[0].value[props.itemX]}</span><br/>`;
+                        for (let param of params) {
+                            tooltip += `<span class="text-caption" style="color: ${param.color};">● ${param.value[props.itemName]}：</span><span class="font-weight-bold">${param.value[props.itemY]}${props.yAxisUnit}</span><br/>`;
+                        }
+                    } else {
+                        tooltip = `<span class="text-caption">${props.xAxisTitle}：</span><span class="font-weight-bold">${params[0].value[props.itemX]}</span><br/><span class="text-caption">${props.yAxisTitle}：</span><span class="font-weight-bold">${params[0].value[props.itemY]}${props.yAxisUnit}</span>`;
                     }
                 }
                 return tooltip;
@@ -263,6 +265,7 @@ export function useCoord($http, type, props) {
                     chartOptions.value.legend.data = legends;
                     chartOptions.value.dataset = dataset;
                 }
+                addMarkLines();
             }
         },
         {
@@ -295,7 +298,7 @@ export function useCoord($http, type, props) {
             },
             smooth: props.smooth,
             markLine: {
-                data: props.lines,
+                data: [],
             }
         };
         if (type === 'area') {
@@ -313,10 +316,18 @@ export function useCoord($http, type, props) {
             };
             if (props.itemZ) {
                 serie['symbolSize'] = function (value) {
-                    return Math.abs(value[props.itemZ]) / Math.pow(10, props.exponent);
+                    let minSize = props.minPointSize;
+                    let maxSize = props.maxPointSize;
+                    let values = props.multiple ? chartData.value.flat() : chartData.value;
+                    values = values.map((item) => {
+                        return Math.abs(item[props.itemZ]);
+                    });
+                    let minValue = Math.min(...values);
+                    let maxValue = Math.max(...values);
+                    return (Math.abs(value[props.itemZ]) - minValue) / (maxValue - minValue) * (maxSize - minSize) + minSize;
                 };
             } else {
-                serie['symbolSize'] = props.pointSize;
+                serie['symbolSize'] = props.minPointSize;
             }
         } else if (type === 'column') {
             if (props.stacked) {
@@ -353,6 +364,35 @@ export function useCoord($http, type, props) {
             immediate: true
         }
     );
+
+    watch(
+        () => props.lines,
+        (value) => {
+            addMarkLines();
+        },
+        {
+            immediate: true,
+            deep: true,
+        }
+    );
+
+    function addMarkLines() {
+        if (Arrays.isNotEmpty(chartOptions.value.series)) {
+            chartOptions.value.series[0].markLine.data.length = 0;
+            if (Arrays.isNotEmpty(props.lines)) {
+                let lines = cloneDeep(props.lines);
+                lines.forEach((line) => {
+                    line['tooltip'] = {
+                        trigger: 'item',
+                        formatter(params) {
+                            return `<span class="text-caption">${params.name}：</span><span class="font-weight-bold">${params.value}</span>`;
+                        }
+                    };
+                    chartOptions.value.series[0].markLine.data.push(line);
+                });
+            }
+        }
+    }
 
     watch(
         () => props.yAxisMin,

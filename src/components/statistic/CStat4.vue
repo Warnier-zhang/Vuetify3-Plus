@@ -1,6 +1,6 @@
 <template>
-    <v-card class="elevation-2">
-        <v-card-text class="pb-2">
+    <BaseStat1>
+        <template v-slot:subtitle="{ subtitle, color }">
             <v-toolbar
                 color="rgba(0, 0, 0, 0)"
                 height="24"
@@ -21,52 +21,32 @@
                 <v-spacer></v-spacer>
 
                 <div :class="['text-caption', 'text-truncate', 'font-weight-bold', `text-${color}`]">
-                    <slot name="emphasis">
-                        {{ emphasis }}
-                    </slot>
+                    {{ hint }}
                 </div>
             </v-toolbar>
-        </v-card-text>
+        </template>
 
-        <v-card-item class="py-0">
-            <v-card-title class="font-weight-bold">
-                <slot name="title">
-                    {{ title }}
-                </slot>
-            </v-card-title>
-        </v-card-item>
-
-        <v-card-text class="text-caption text-truncate pt-0">
-            <slot name="text">
-                {{ text }}
+        <template
+            v-for="(item, key, index) in $slots"
+            :key="index"
+            v-slot:[key]="slotProps">
+            <slot
+                :name="key"
+                v-bind="slotProps">
             </slot>
-        </v-card-text>
-    </v-card>
+        </template>
+    </BaseStat1>
 </template>
 
 <script setup>
+import BaseStat1 from "@/components/statistic/BaseStat1.vue";
+
 defineOptions({
     name: 'CStat4',
 });
 
 const props = defineProps({
-    title: {
-        type: String,
-        default: null
-    },
-    subtitle: {
-        type: String,
-        default: null
-    },
-    text: {
-        type: String,
-        default: null
-    },
-    emphasis: {
-        type: String,
-        default: null
-    },
-    color: {
+    hint: {
         type: String,
         default: null
     },

@@ -13,7 +13,7 @@
 
         <v-card-text class="text-caption text-truncate py-1">
             <slot name="text">
-                {{ text }}
+                <span :title="text">{{ text }}</span>
             </slot>
         </v-card-text>
 

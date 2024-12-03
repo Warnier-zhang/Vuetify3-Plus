@@ -8,6 +8,7 @@
         <v-menu
             v-model="showMenu"
             activator="parent"
+            :disabled="$attrs.readonly"
             :close-on-back="false"
             :close-on-content-click="false">
             <v-card :title="`选择${$attrs.label}`">

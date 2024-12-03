@@ -32,7 +32,8 @@
                     show-legend
                     :show-point="false"
                     multiple
-                    :aspect-ratio="1">
+                    :aspect-ratio="1"
+                    item-x="x">
                 </CLineChart>
             </v-col>
 
@@ -111,7 +112,6 @@
                     y-axis-unit="%"
                     name-title="名称"
                     item-z="y"
-                    :exponent="0.1"
                     :aspect-ratio="1">
                 </CBubbleChart>
             </v-col>
@@ -127,7 +127,6 @@
                     y-axis-title="市占率"
                     y-axis-unit="%"
                     item-z="y"
-                    :exponent="0.1"
                     show-legend
                     multiple
                     :aspect-ratio="1">

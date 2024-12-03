@@ -5,7 +5,12 @@
         <v-list-subheader>CCrudTable:</v-list-subheader>
         <v-row>
             <v-col cols="12">
+                <v-btn @click="onSaveClick">另存为图片</v-btn>
+            </v-col>
+
+            <v-col cols="12">
                 <CCrudTable
+                    ref="crudTable"
                     title="文件资源管理器"
                     :columns="columns"
                     fixed-index
@@ -15,6 +20,7 @@
                     remove-item-url="/api/file-explorer/files/delete"
                     show-refresh-btn
                     show-export-btn
+                    export-type="image"
                     show-icon-btn
                     row-key="id"
                     row-title="name">
@@ -163,6 +169,12 @@ const {FileUtils} = useLang();
 
 function onDownloadClick(file) {
     FileUtils.download(file.name, file.type, `/api/file-explorer/files/download?id=${file.id}`);
+}
+
+const crudTable = ref(null);
+
+async function onSaveClick() {
+    console.log(await crudTable.value.saveAsImage());
 }
 </script>
 

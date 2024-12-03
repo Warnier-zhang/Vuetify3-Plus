@@ -6,10 +6,10 @@
         <v-row>
             <v-col cols="2">
                 <CStat1
+                    color="red"
                     title="245k"
                     subtitle="Sales"
                     text="Calculated in last 7 days"
-                    color="red"
                     variant="outlined">
                 </CStat1>
             </v-col>
@@ -26,6 +26,7 @@
 
             <v-col cols="2">
                 <CStat1
+                    class="elevation-2"
                     color="red"
                     title="245k"
                     subtitle="Sales"
@@ -55,15 +56,11 @@
                     @click="()=>{CMessage.info('Clickable');}"
                     title="245k"
                     subtitle="Sales"
+                    icon="mdi-trending-up"
                     color="red"
-                    text="Calculated in last 7 days">
-                    <template v-slot:icon>
-                        <v-chip
-                            size="small"
-                            prepend-icon="mdi-trending-up">
-                            <span class="font-weight-bold">+15%</span>
-                        </v-chip>
-                    </template>
+                    text="Calculated in last 7 days"
+                    chip
+                    chip-text="+15%">
                 </CStat2>
             </v-col>
 
@@ -86,9 +83,33 @@
                     title="245k"
                     subtitle="Sales"
                     text="Calculated in last 7 days"
-                    emphasis="+15%"
+                    hint="+15%"
                     color="red">
                 </CStat4>
+            </v-col>
+
+            <v-col cols="2">
+                <v-list-subheader>CStat8:</v-list-subheader>
+
+                <CStat8
+                    title="245k"
+                    subtitle="Sales"
+                    color="red"
+                    type="trend"
+                    :items="[4, 2, 5, 7, 1, 6, 3]">
+                </CStat8>
+            </v-col>
+
+            <v-col cols="2">
+                <v-list-subheader>CStat8:</v-list-subheader>
+
+                <CStat8
+                    title="245k"
+                    subtitle="Sales"
+                    color="red"
+                    type="bar"
+                    :items="[4, 2, 5, 6, 17, 1, 3]">
+                </CStat8>
             </v-col>
         </v-row>
 
@@ -164,6 +185,19 @@
                     color="purple"
                     variant="plain">
                 </CStat6>
+            </v-col>
+        </v-row>
+
+        <v-list-subheader>CStat9:</v-list-subheader>
+        <v-row>
+            <v-col cols="2">
+                <CStat9
+                    title="245k"
+                    subtitle="Sales"
+                    color="red"
+                    expected="999"
+                    actual="245">
+                </CStat9>
             </v-col>
         </v-row>
 

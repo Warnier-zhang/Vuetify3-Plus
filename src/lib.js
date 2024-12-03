@@ -39,6 +39,8 @@ import CStat4 from '@/components/statistic/CStat4.vue';
 import CStat5 from '@/components/statistic/CStat5.vue';
 import CStat6 from '@/components/statistic/CStat6.vue';
 import CStat7 from '@/components/statistic/CStat7.vue';
+import CStat8 from '@/components/statistic/CStat8.vue';
+import CStat9 from '@/components/statistic/CStat9.vue';
 
 // Other
 import CImg from '@/components/CImg.vue';
@@ -50,10 +52,12 @@ import CCKEditor5 from '@/components/CCKEditor5.vue';
 // Composables
 import {useDate} from '@/composables/date';
 import {useForm} from '@/composables/form';
+import {useFormat} from '@/composables/format';
 import {useLang} from '@/composables/lang';
 import {useArrays} from '@/composables/arrays';
 import {useMath} from '@/composables/math';
 import {useResize} from '@/composables/resize';
+import {useStringUtils} from '@/composables/string-utils';
 import {useTimer} from '@/composables/timer';
 
 export {
@@ -98,6 +102,8 @@ export {
     CStat5,
     CStat6,
     CStat7,
+    CStat8,
+    CStat9,
 
     // Other
     CImg,
@@ -109,10 +115,12 @@ export {
     // Composables
     useDate,
     useForm,
+    useFormat,
     useLang,
     useArrays,
     useMath,
     useResize,
+    useStringUtils,
     useTimer,
 }
 
@@ -152,6 +160,8 @@ const components = [
     CStat5,
     CStat6,
     CStat7,
+    CStat8,
+    CStat9,
 
     // Other
     CImg,

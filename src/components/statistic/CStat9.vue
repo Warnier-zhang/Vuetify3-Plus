@@ -1,13 +1,13 @@
 <template>
     <BaseStat2 class="d-inline-block">
         <template v-slot:prependIcon="{icon, color}">
-            <v-avatar
+            <v-progress-circular
+                :model-value="actual / expected * 100"
                 :color="color"
-                class="text-white"
-                :icon="icon"
-                :rounded="rounded"
-                :variant="variant">
-            </v-avatar>
+                :size="64"
+                :width="8">
+                {{ Math.ceil(actual / expected * 100) }}%
+            </v-progress-circular>
         </template>
 
         <template
@@ -26,18 +26,18 @@
 import BaseStat2 from "@/components/statistic/BaseStat2.vue";
 
 defineOptions({
-    name: 'CStat6',
+    name: 'CStat9',
 });
 
 const props = defineProps({
-    rounded: {
-        type: Boolean,
-        default: true
+    actual: {
+        type: [String, Number],
+        default: null
     },
-    variant: {
-        type: String,
-        default: 'elevated'
-    },
+    expected: {
+        type: [String, Number],
+        default: null
+    }
 });
 </script>
 

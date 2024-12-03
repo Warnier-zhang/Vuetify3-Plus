@@ -54,6 +54,7 @@
     "echarts": "^5.5.0",
     "highcharts": "^11.1.0",
     "highcharts-vue": "^1.4.3",
+    "html2canvas": "^1.4.1",
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
     "v-viewer": "^3.0.11",

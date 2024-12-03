@@ -1,20 +1,6 @@
 <template>
-    <v-card class="elevation-2">
-        <v-card-item class="pt-4 pb-0">
-            <v-card-subtitle>
-                <slot name="subtitle">
-                    {{ subtitle }}
-                </slot>
-            </v-card-subtitle>
-
-            <v-card-title class="font-weight-bold">
-                <slot name="title">
-                    {{ title }}
-                </slot>
-            </v-card-title>
-        </v-card-item>
-
-        <v-card-text>
+    <BaseStat1>
+        <template v-slot:text="{ color }">
             <div class="d-flex flex-row justify-space-between">
                 <div class="text-caption text-medium-emphasis">
                     {{ Math.ceil(actual / expected * 100) }}% ({{ actual }})
@@ -30,28 +16,28 @@
                 height="8"
                 rounded>
             </v-progress-linear>
-        </v-card-text>
-    </v-card>
+        </template>
+
+        <template
+            v-for="(item, key, index) in $slots"
+            :key="index"
+            v-slot:[key]="slotProps">
+            <slot
+                :name="key"
+                v-bind="slotProps">
+            </slot>
+        </template>
+    </BaseStat1>
 </template>
 
 <script setup>
+import BaseStat1 from "@/components/statistic/BaseStat1.vue";
+
 defineOptions({
     name: 'CStat3',
 });
 
 const props = defineProps({
-    title: {
-        type: String,
-        default: null
-    },
-    subtitle: {
-        type: String,
-        default: null
-    },
-    color: {
-        type: String,
-        default: null
-    },
     actual: {
         type: [String, Number],
         default: null

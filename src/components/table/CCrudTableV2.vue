@@ -117,6 +117,7 @@
             <slot name="top"></slot>
 
             <v-data-table-virtual
+                :ref="(el) => setRefs('dataTable', el)"
                 class="text-no-wrap"
                 :headers="columns.filter((column) => !column.hidden)"
                 :items="data"
@@ -127,24 +128,25 @@
                 :width="width"
                 :height="height"
                 fixed-header
-                :key="data.length"
-                :item-height="16"
                 no-data-text="没有数据">
                 <template
-                    v-for="column in columns"
+                    v-for="column in columns.map((column) => column.children ? column.children : column).flat()"
                     v-slot:[`item.${column.key}`]="{index, item}">
                     <slot
                         v-if="column.renderable"
                         :name="`item.${column.key}`"
+                        :items="data"
+                        :index="index"
                         :item="item"
-                        :value="column.type === 'code'? item[`${column.key}CodeName`]: item[column.key]">
+                        :raw-value="item[column.key]"
+                        :value="formatValue(column, item)">
                     </slot>
 
-                    <template v-else-if="column.key === 'index'">
+                    <template v-else-if="column.type === 'index'">
                         {{ index + 1 }}
                     </template>
 
-                    <template v-else-if="column.key === 'operation'">
+                    <template v-else-if="column.type === 'operation'">
                         <template v-if="showUpdateBtn">
                             <v-btn
                                 v-if="showIconBtn"
@@ -202,7 +204,17 @@
                     </template>
 
                     <template v-else>
-                        {{ column.type === 'code' ? item[`${column.key}CodeName`] : item[column.key] }}
+                        <div
+                            v-if="column.type === 'longtext'"
+                            class="text-truncate"
+                            style="max-width: 200px;"
+                            v-html="formatValue(column, item)"
+                            :title="item[column.key]">
+                        </div>
+
+                        <div v-else>
+                            {{ formatValue(column, item) }}
+                        </div>
                     </template>
                 </template>
             </v-data-table-virtual>
@@ -268,7 +280,7 @@
         v-model="showEditor"
         persistent
         no-click-animation
-        width="600"
+        :width="editorWidth"
         z-index="1800">
         <v-card>
             <v-card-title>
@@ -342,10 +354,12 @@ const {
     onExportClick,
     columns,
     data,
+    formatValue,
     sortBys,
     onColumnSort,
     codesHolder,
     reload,
+    loadByCondition,
     load,
     showFilter,
     conditions,
@@ -356,7 +370,8 @@ const {
     editorType,
     editedItem,
     closeEditor,
-    save
+    save,
+    saveAsImage,
 } = useCrudTable(
     $http,
     props,
@@ -367,8 +382,10 @@ const {
 // Expose methods of Child Components
 defineExpose({
     reload,
+    loadByCondition,
     onAddClick,
     onUpdateClick,
+    saveAsImage,
 });
 </script>
 

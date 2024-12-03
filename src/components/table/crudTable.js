@@ -4,8 +4,12 @@ import CModal from '@/components/feedback/CModal';
 
 // Composables
 import {useLang} from '@/composables/lang';
+import {useFormat} from '@/composables/format';
+import {useStringUtils} from '@/composables/string-utils';
 
-const {AsyncTask, Arrays} = useLang();
+const {AsyncTask, Arrays, FileUtils} = useLang();
+const {formatNumber, formatInteger, formatDecimal, formatPercent, formatCurrency, formatDateTime} = useFormat();
+const {toHtml} = useStringUtils();
 
 // Vue
 import {onBeforeUnmount, onMounted, ref, toValue, watch} from 'vue';
@@ -13,6 +17,7 @@ import {onBeforeUnmount, onMounted, ref, toValue, watch} from 'vue';
 // Utilities
 import cloneDeep from 'lodash/cloneDeep';
 import * as XLSX from 'xlsx';
+import html2canvas from 'html2canvas';
 
 export const crudTableProps = {
     title: {
@@ -51,9 +56,12 @@ export const crudTableProps = {
         type: Boolean,
         default: false
     },
-    exportExcel: {
-        type: Boolean,
-        default: true
+    exportType: {
+        type: String,
+        validator(value) {
+            return ['excel', 'image'].includes(value);
+        },
+        default: 'excel',
     },
     showUpdateBtn: {
         type: Boolean,
@@ -87,6 +95,10 @@ export const crudTableProps = {
         type: String,
         default: null,
     },
+    removeItemTip: {
+        type: Function,
+        default: null,
+    },
     rowKey: {
         type: String,
         default: null,
@@ -94,6 +106,10 @@ export const crudTableProps = {
     rowTitle: {
         type: String,
         default: null,
+    },
+    pageSize: {
+        type: [String, Number],
+        default: 10,
     },
     sortMode: {
         type: String,
@@ -117,6 +133,10 @@ export const crudTableProps = {
     heightPadding: {
         type: Number,
         default: -1,
+    },
+    editorWidth: {
+        type: Number,
+        default: 600,
     },
 };
 
@@ -160,11 +180,12 @@ export function useCrudTable($http, props, attrs, emit) {
                 });
 
                 // 序号
-                let hasIndex = columns.value.find(column => column.key === 'index');
+                let hasIndex = columns.value.find(column => column.type === 'index');
                 if (!hasIndex && props.showIndex) {
                     columns.value.unshift({
                         title: '序号',
                         key: 'index',
+                        type: 'index',
                         sortable: false,
                         editable: false,
                         exportable: false,
@@ -177,11 +198,12 @@ export function useCrudTable($http, props, attrs, emit) {
 
                 // 操作
                 // TODO：固定列到右侧
-                let hasOperation = columns.value.find(column => column.key === 'operation');
+                let hasOperation = columns.value.find(column => column.type === 'operation');
                 if (!hasOperation && props.showOperation) {
                     columns.value.push({
                         title: '操作',
                         key: 'operation',
+                        type: 'operation',
                         sortable: false,
                         editable: false,
                         exportable: false,
@@ -203,7 +225,7 @@ export function useCrudTable($http, props, attrs, emit) {
     const codesHolder = ref({});
 
     async function loadAllCodes() {
-        for (let column of toValue(columns).filter((column) => column.type === 'code' && typeof column.codesRef === 'undefined')) {
+        for (let column of toValue(columns).filter((column) => column.type === 'code' && !column.codesRef)) {
             await loadCodes(column.key, column.codes, column.url);
         }
     }
@@ -299,11 +321,13 @@ export function useCrudTable($http, props, attrs, emit) {
 
     watch(
         () => attrs.data,
-        (value) => {
+        async (value) => {
             if (Arrays.isNotEmpty(value)) {
+                await loadAllCodes();
+
                 data.value = value;
                 if (props.disablePagination) {
-                    total.value = value.length;
+                    total.value = props.pages ? props.pages * size.value : value.length;
                 }
             } else {
                 data.value = [];
@@ -355,9 +379,11 @@ export function useCrudTable($http, props, attrs, emit) {
 
     const page = ref(1);
 
-    const size = ref(10);
+    const size = ref(props.pageSize);
 
-    function load() {
+    async function load() {
+        await loadAllCodes();
+
         // 过滤
         if (showFilter.value) {
             showFilter.value = false;
@@ -371,7 +397,7 @@ export function useCrudTable($http, props, attrs, emit) {
         if (props.sortMode === 'server') {
             params['sortState'] = toSortState();
         }
-        if (!props.disablePagination) {
+        if (!props.disablePagination || props.pages) {
             params['page'] = page.value;
             params['size'] = size.value;
         }
@@ -380,9 +406,9 @@ export function useCrudTable($http, props, attrs, emit) {
         } else {
             emit("load", params);
         }
-        if (props.sortMode === 'client') {
-            clearSort();
-        }
+        // if (props.sortMode === 'client') {
+        //     clearSort();
+        // }
     }
 
     async function loadItems(params) {
@@ -395,16 +421,18 @@ export function useCrudTable($http, props, attrs, emit) {
         if (response.errorCode === 1) {
             if (response.data) {
                 if (typeof response.data.items === 'undefined' && typeof response.data.total === 'undefined') {
-                    if (props.disablePagination && Arrays.isNotEmpty(response.data)) {
-                        data.value = processItems(response.data);
-                        total.value = response.data.length;
+                    if (Arrays.isNotEmpty(response.data)) {
+                        data.value = response.data;
+                        if (props.disablePagination) {
+                            total.value = props.pages ? props.pages * size.value : response.data.length;
+                        }
                     } else {
                         data.value = [];
                         total.value = 0;
                     }
                 } else {
                     if (Arrays.isNotEmpty(response.data.items)) {
-                        data.value = processItems(response.data.items);
+                        data.value = response.data.items;
                         total.value = response.data.total;
                     } else {
                         data.value = [];
@@ -426,15 +454,26 @@ export function useCrudTable($http, props, attrs, emit) {
         });
     }
 
-    function processItems(items) {
-        let data = [];
-        for (let item of items) {
-            for (let column of toValue(columns).filter((column) => column.type === 'code')) {
-                item[`${column.key}CodeName`] = getCodeName(column, item);
-            }
-            data.push(item);
+    function formatValue(column, item) {
+        if (column.type === 'code') {
+            return getCodeName(column, item);
+        } else if (column.type === 'number') {
+            return formatNumber(item[column.key], column.format);
+        } else if (column.type === 'integer') {
+            return formatInteger(item[column.key]);
+        } else if (column.type === 'decimal') {
+            return formatDecimal(item[column.key], column.format);
+        } else if (column.type === 'percent') {
+            return formatPercent(item[column.key], column.format);
+        } else if (column.type === 'currency') {
+            return formatCurrency(item[column.key], column.format);
+        } else if (column.type === 'datetime') {
+            return formatDateTime(item[column.key], column.format);
+        } else if (column.type === 'longtext') {
+            return toHtml(item[column.key]);
+        } else {
+            return item[column.key];
         }
-        return data;
     }
 
     function onRefreshClick() {
@@ -442,6 +481,11 @@ export function useCrudTable($http, props, attrs, emit) {
     }
 
     function reload() {
+        load();
+    }
+
+    function loadByCondition(additions) {
+        conditions.value = Object.assign({}, conditions.value, additions);
         load();
     }
 
@@ -457,17 +501,28 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (props.heightPadding > 0) {
             height.value = window.innerHeight - props.heightPadding - 64 - 1;
-            if (props.disablePagination) {
-                height.value -= 57;
-            } else {
+            if (!props.disablePagination) {
                 height.value -= 62;
+            } else {
+                if (props.pages) {
+                    height.value -= 46;
+                }
             }
         }
     }
 
-    onMounted(async () => {
+    watch(
+        () => props.pages,
+        (value) => {
+            onResize();
+        },
+        {
+            immediate: true
+        }
+    );
+
+    onMounted(() => {
         onResize();
-        await loadAllCodes();
         if (props.loadItemsImmediate) {
             load();
         }
@@ -496,13 +551,16 @@ export function useCrudTable($http, props, attrs, emit) {
         // editedItem.value = {};
     }
 
-    function onAddClick(title) {
+    async function onAddClick(title) {
         let defaultItem = {};
-        toValue(columns).forEach((column) => {
+        for (let column of toValue(columns)) {
             if (column.editable !== false) {
-                defaultItem[column.key] = column.default ? column.default() : null;
+                defaultItem[column.key] = null;
+                if (column.default) {
+                    defaultItem[column.key] = await Promise.resolve(column.default());
+                }
             }
-        });
+        }
         openEditor(defaultItem, title ? title : '新增', 'add');
     }
 
@@ -539,7 +597,7 @@ export function useCrudTable($http, props, attrs, emit) {
     }
 
     async function addItem() {
-        let item = convertEditedItem();
+        let item = await convertEditedItem();
         let [error, response] = await AsyncTask($http.post(props.addItemUrl, item));
         if (error) {
             CMessage.error(error.message);
@@ -548,7 +606,6 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (response.errorCode === 1) {
             CMessage.success(response.msg);
-            await loadAllCodes();
             load();
         } else {
             CMessage.error(response.msg);
@@ -558,7 +615,7 @@ export function useCrudTable($http, props, attrs, emit) {
     }
 
     async function updateItem() {
-        let item = convertEditedItem();
+        let item = await convertEditedItem();
         let [error, response] = await AsyncTask($http.post(props.updateItemUrl, item));
         if (error) {
             CMessage.error(error.message);
@@ -567,7 +624,6 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (response.errorCode === 1) {
             CMessage.success(response.msg);
-            await loadAllCodes();
             load();
         } else {
             CMessage.error(response.msg);
@@ -576,13 +632,19 @@ export function useCrudTable($http, props, attrs, emit) {
         emit('after-update');
     }
 
-    function convertEditedItem() {
+    async function convertEditedItem() {
         let item = cloneDeep(editedItem.value);
-        toValue(columns).forEach((column) => {
-            if (item[column.key] && column.converter) {
-                item[column.key] = column.converter(item[column.key]);
+        for (let column of toValue(columns)) {
+            if (item[column.key]) {
+                if (column.converter) {
+                    item[column.key] = await Promise.resolve(column.converter(item[column.key]));
+                }
+            } else {
+                if (column.default) {
+                    item[column.key] = await Promise.resolve(column.default());
+                }
             }
-        });
+        }
         return item;
     }
 
@@ -590,9 +652,12 @@ export function useCrudTable($http, props, attrs, emit) {
      * 删除
      */
     function onRemoveClick(item) {
+        let message = props.removeItemTip && typeof props.removeItemTip === 'function' ?
+            props.removeItemTip(item) :
+            `确定要删除<span class="font-weight-bold">${item[props.rowTitle]}</span>吗？`;
         CModal.confirm({
             title: '删除',
-            message: `确定要删除<span class="font-weight-bold">${item[props.rowTitle]}</span>吗？`,
+            message,
             onOkClick() {
                 remove(item[props.rowKey]);
             },
@@ -628,7 +693,6 @@ export function useCrudTable($http, props, attrs, emit) {
         }
         if (response.errorCode === 1) {
             CMessage.success(response.msg);
-            await loadAllCodes();
             load();
         } else {
             CMessage.error(response.msg);
@@ -641,8 +705,10 @@ export function useCrudTable($http, props, attrs, emit) {
      * 导出
      */
     function onExportClick() {
-        if (props.exportExcel) {
+        if (props.exportType === 'excel') {
             exportExcel();
+        } else if (props.exportType === 'image') {
+            exportImage();
         } else {
             emit('export', {
                 conditions: cloneDeep(conditions.value),
@@ -656,9 +722,7 @@ export function useCrudTable($http, props, attrs, emit) {
         let rows = data.value.map((item) => {
             let row = {};
             headers.forEach((header) => {
-                row[header.key] = header.excelValue ?
-                    header.excelValue(item) :
-                    header.type === 'code' ? item[`${header.key}CodeName`] : item[header.key];
+                row[header.key] = header.excelValue ? header.excelValue(item) : formatValue(header, item);
             });
             return row;
         });
@@ -677,6 +741,26 @@ export function useCrudTable($http, props, attrs, emit) {
         XLSX.writeFile(workbook, `${props.title ? props.title : '导出Excel'}.xlsx`, {compression: true});
     }
 
+    async function exportImage() {
+        let url = await saveAsImage();
+        if (url) {
+            FileUtils.download(`${props.title ? props.title : '导出图片'}.png`, 'image/png', url);
+        }
+    }
+
+    async function saveAsImage() {
+        let table = refs.value.dataTable.$el.getElementsByTagName('table')[0];
+
+        let canvas = null;
+        try {
+            canvas = await html2canvas(table);
+        } catch (error) {
+            CMessage.error(error.message);
+            console.log(error);
+        }
+        return canvas ? canvas.toDataURL('image/png') : null;
+    }
+
     return {
         onResize,
         width,
@@ -687,6 +771,7 @@ export function useCrudTable($http, props, attrs, emit) {
         columns,
         total,
         data,
+        formatValue,
         sortBys,
         onColumnSort,
         codesHolder,
@@ -694,6 +779,7 @@ export function useCrudTable($http, props, attrs, emit) {
         size,
         load,
         reload,
+        loadByCondition,
         showFilter,
         conditions,
         onUpdateClick,
@@ -704,6 +790,7 @@ export function useCrudTable($http, props, attrs, emit) {
         editorType,
         editedItem,
         closeEditor,
-        save
+        save,
+        saveAsImage,
     };
 }

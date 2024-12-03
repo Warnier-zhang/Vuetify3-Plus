@@ -3,7 +3,10 @@ import CMessage from '@/components/feedback/CMessage';
 
 // Composables
 import {useLang} from '@/composables/lang';
-import {useMath} from '@/composables/math';
+import {useFormat} from '@/composables/format';
+
+const {Arrays, AsyncTask} = useLang();
+const {formatPercent} = useFormat();
 
 // Vue
 import {ref, watch} from "vue";
@@ -52,8 +55,6 @@ export const pieProps = {
 };
 
 export function usePie($http, type, props) {
-    const {percentage} = useMath();
-
     const chartOptions = ref({
         title: {
             text: props.title,
@@ -65,7 +66,7 @@ export function usePie($http, type, props) {
             formatter(params) {
                 let name = params.value[props.itemName];
                 let value = params.value[props.itemValue];
-                let percent = percentage(params.percent / 100);
+                let percent = formatPercent(params.percent / 100);
                 return `<span class="text-caption">${name}：</span><span class="font-weight-bold">${value}${props.valueUnit}</span><span class="text-caption">（占<span class="font-weight-bold">${percent}</span>）</span>`;
             },
             confine: true,
@@ -82,7 +83,6 @@ export function usePie($http, type, props) {
     });
 
     const chartData = ref([]);
-    const {Arrays, AsyncTask} = useLang();
     watch(
         [
             () => props.url,
@@ -100,7 +100,6 @@ export function usePie($http, type, props) {
             deep: true,
         }
     );
-
 
     async function loadSeries() {
         let [error, response] = await AsyncTask($http.get(props.url));

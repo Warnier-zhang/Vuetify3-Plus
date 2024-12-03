@@ -1,61 +1,48 @@
 <template>
-    <v-card class="elevation-2">
-        <v-card-item
-            class="pt-4 pb-0"
-            :subtitle="subtitle">
-            <template v-slot:append>
-                <div style="min-height: 32px;"
-                     :class="[`text-${color}`]">
-                    <slot name="icon">
-                        <v-btn
-                            variant="tonal"
-                            size="x-small"
-                            :icon="icon">
-                        </v-btn>
-                    </slot>
-                </div>
-            </template>
-        </v-card-item>
+    <BaseStat1>
+        <template v-slot:appendIcon="{ icon, color }">
+            <v-chip
+                v-if="chip"
+                :color="color"
+                :prepend-icon="icon"
+                size="small">
+                <span class="font-weight-bold">{{ chipText }}</span>
+            </v-chip>
 
-        <v-card-item class="py-0">
-            <v-card-title class="font-weight-bold">
-                <slot name="title">
-                    {{ title }}
-                </slot>
-            </v-card-title>
-        </v-card-item>
+            <v-btn
+                v-else
+                :color="color"
+                :icon="icon"
+                size="x-small"
+                variant="tonal">
+            </v-btn>
+        </template>
 
-        <v-card-text class="text-caption text-truncate">
-            <slot name="text">
-                {{ text }}
+        <template
+            v-for="(item, key, index) in $slots"
+            :key="index"
+            v-slot:[key]="slotProps">
+            <slot
+                :name="key"
+                v-bind="slotProps">
             </slot>
-        </v-card-text>
-    </v-card>
+        </template>
+    </BaseStat1>
 </template>
 
 <script setup>
+import BaseStat1 from "@/components/statistic/BaseStat1.vue";
+
 defineOptions({
     name: 'CStat2',
 });
 
 const props = defineProps({
-    title: {
-        type: String,
-        default: null
+    chip: {
+        type: Boolean,
+        default: false
     },
-    subtitle: {
-        type: String,
-        default: null
-    },
-    text: {
-        type: String,
-        default: null
-    },
-    icon: {
-        type: String,
-        default: null
-    },
-    color: {
+    chipText: {
         type: String,
         default: null
     },
